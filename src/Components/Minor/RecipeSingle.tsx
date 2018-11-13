@@ -36,7 +36,7 @@ export class RecipeSingle extends React.Component<{
         const {techUnlockedBy} = this.state;
 
         if (techUnlockedBy === null) {
-            return <span/>
+            return <tr/>
         }
 
         return (
