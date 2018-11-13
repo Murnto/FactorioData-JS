@@ -6,6 +6,7 @@ import {PropsRoute} from "../Util";
 import {PackTechList} from "./PackTechList";
 import {PackItemInfo} from "./PackItemInfo";
 import {PackComponentTest} from "./PackComponentTest";
+import {CraftingCategoryInfo} from "./CraftingCategoryInfo";
 
 export function PackInfo(props: RouteComponentProps) {
     const {match} = props as any;
@@ -46,6 +47,9 @@ export default class PackConfig extends React.Component
         promises.push(this.loadDataItem("recipes"));
         promises.push(this.loadDataItem("items"));
         promises.push(this.loadDataItem("technologies"));
+        promises.push(this.loadDataItem("furnaces"));
+        promises.push(this.loadDataItem("assemblingMachines"));
+        promises.push(this.loadDataItem("miningDrills"));
 
         this.props.onPackChange(packId);
 
@@ -79,6 +83,7 @@ export default class PackConfig extends React.Component
                     {/*return <span>Nah</span>*/}
                     {/*// return <PackItemInfo {...props} data={this.state.data}/>*/}
                 {/*}}/>*/}
+                <PropsRoute path={`${match.path}/craftingCat/:category`} component={CraftingCategoryInfo} data={this.state.data}/>
                 <PropsRoute path={`${match.path}/i/:itemType/:itemName`} component={PackItemInfo} data={this.state.data}/>
             </Switch>
         )

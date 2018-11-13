@@ -2,12 +2,24 @@ import {Ingredient, Recipe} from "./types/factorio.recipe";
 import {Item} from "./types/factorio.item";
 import {Prototype} from "./types/factorio.prototype";
 import {Technology} from "./types/factorio.technology";
+import {AssemblingMachine} from "./types/factorio.assemblignmachine";
+import {Furnace} from "./types/factorio.furnace";
+
+interface KnownThings {
+    furnace: {[name: string]: Furnace}
+    recipe: {[name: string]: Recipe}
+    technology: {[name: string]: Technology}
+    // 'mining-drill': {[name: string]: MiningDrill}
+    'assembling-machine': {[name: string]: AssemblingMachine}
+
+    [type: string]: {[name: string]: Prototype}
+}
 
 export class PackLoadedData {
     public recipes: { [name: string]: Recipe };
     public technologies: { [name: string]: Technology };
     public items: { [type: string]: { [name: string]: Item } };
-    public loadedThings: { [type: string]: { [name: string]: Prototype } } = {};
+    public loadedThings: KnownThings = {} as any;
     public isLoaded: boolean = false;
     public packId: string;
     private itemIsUsedOrProducedByRecipe: { [type: string]: { [name: string]: boolean } } = {};
@@ -27,6 +39,24 @@ export class PackLoadedData {
         const result = this.recipesProducingCache[itemOrType][name as string];
 
         return result ? result : [];
+    }
+
+    public craftersWithCategory(category: string): Array<AssemblingMachine | Furnace> {
+        const res: Array<AssemblingMachine | Furnace> = [];
+
+        for (const as of Object.values(this.loadedThings["assembling-machine"])) {
+            if (as.crafting_categories.indexOf(category) !== -1) {
+                res.push(as)
+            }
+        }
+
+        for (const frn of Object.values(this.loadedThings.furnace)) {
+            if (frn.crafting_categories.indexOf(category) !== -1) {
+                res.push(frn)
+            }
+        }
+
+        return res;
     }
 
     public recipesUsedIn(itemOrType: Item | string, name?: string): Recipe[] {
