@@ -1,22 +1,22 @@
 import {PrototypeHasIcon} from "./factorio.prototype";
 
 export interface Recipe extends PrototypeHasIcon {
-    ingredients: Ingredient[];
-    results: Ingredient[];
     category: string;
-    subgroup: null | string;
-    energy_required: number;
-    main_product: null | string;
     enabled: boolean;
+    energy_required: number;
+    ingredients: Ingredient[];
+    main_product: null | string;
+    results: Ingredient[];
+    subgroup: null | string;
 }
 
 export interface Ingredient {
-    type: IngredientType;
-    name: string;
     amount: number | null;
-    amount_min: number | null;
     amount_max: number | null;
+    amount_min: number | null;
+    name: string;
     probability: number | null;
+    type: IngredientType;
 }
 
 export enum IngredientType {

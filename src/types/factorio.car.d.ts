@@ -1,60 +1,60 @@
 import {Sound} from "./factorio.entity";
 
 export interface Car {
-    tank: Tank;
-    car: CarClass;
     "bob-tank-2": BobTank;
     "bob-tank-3": BobTank;
+    car: CarClass;
+    tank: Tank;
 }
 
 export interface BobTank {
-    type: string;
-    rotation_speed: number;
-    working_sound: Animation;
-    open_sound: Sound;
-    selection_box: { [key: string]: { [key: string]: number } };
-    turret_animation: Animation;
-    burner: Burner;
-    corpse: string;
-    turret_return_timeout: number;
-    max_health: number;
-    icon: string;
-    flags: { [key: string]: string };
-    stop_trigger_speed: number;
-    weight: number;
-    terrain_friction_modifier: number;
-    icon_size: number;
-    sound_minimum_speed: number;
-    effectivity: number;
-    sound_no_fuel: Sound;
-    energy_per_hit_point: number;
-    light: Animation;
-    stop_trigger: Animation;
-    guns: { [key: string]: string };
-    inventory_size: number;
-    name: string;
-    resistances: { [key: string]: BobTank2_Resistance };
-    tank_driving: boolean;
-    dying_explosion: string;
-    close_sound: Sound;
-    consumption: string;
-    vehicle_impact_sound: Sound;
-    turret_rotation_speed: number;
     animation: Animation;
-    minable: Minable;
-    collision_box: { [key: string]: { [key: string]: number } };
-    friction: number;
     braking_power: string;
+    burner: Burner;
+    close_sound: Sound;
+    collision_box: { [key: string]: { [key: string]: number } };
+    consumption: string;
+    corpse: string;
+    dying_explosion: string;
+    effectivity: number;
+    energy_per_hit_point: number;
+    flags: { [key: string]: string };
+    friction: number;
+    guns: { [key: string]: string };
+    icon: string;
+    icon_size: number;
+    inventory_size: number;
+    light: Animation;
+    max_health: number;
+    minable: Minable;
+    name: string;
+    open_sound: Sound;
+    resistances: { [key: string]: BobTank2_Resistance };
+    rotation_speed: number;
+    selection_box: { [key: string]: { [key: string]: number } };
+    sound_minimum_speed: number;
+    sound_no_fuel: Sound;
+    stop_trigger: Animation;
+    stop_trigger_speed: number;
+    tank_driving: boolean;
+    terrain_friction_modifier: number;
+    turret_animation: Animation;
+    turret_return_timeout: number;
+    turret_rotation_speed: number;
+    type: string;
+    vehicle_impact_sound: Sound;
+    weight: number;
+    working_sound: Animation;
 }
 
 export interface Animation {
 }
 
 export interface Burner {
-    smoke: Animation;
-    fuel_inventory_size: number;
     effectivity: number;
     fuel_category?: string;
+    fuel_inventory_size: number;
+    smoke: Animation;
 }
 
 export interface Minable {
@@ -63,55 +63,55 @@ export interface Minable {
 }
 
 export interface BobTank2_Resistance {
-    type: string;
     decrease: number;
     percent: number;
+    type: string;
 }
 
 export interface CarClass {
-    type: string;
-    render_layer: string;
-    rotation_speed: number;
-    mined_sound: Sound;
-    open_sound: Sound;
-    selection_box: { [key: string]: { [key: string]: number } };
-    turret_animation: Animation;
-    burner: Burner;
-    corpse: string;
     alert_icon_shift: { [key: string]: number };
-    max_health: number;
-    icon: string;
-    flags: { [key: string]: string };
-    stop_trigger_speed: number;
-    weight: number;
-    icon_size: number;
-    sound_minimum_speed: number;
-    effectivity: number;
-    sound_no_fuel: Sound;
-    energy_per_hit_point: number;
-    light: Animation;
-    stop_trigger: Animation;
-    inventory_size: number;
-    guns: Guns;
-    close_sound: Sound;
-    name: string;
-    resistances: { [key: string]: CarResistance };
-    working_sound: Animation;
-    dying_explosion: string;
-    vehicle_impact_sound: Sound;
-    consumption: string;
     animation: Animation;
-    turret_rotation_speed: number;
-    friction: number;
-    minable: Minable;
-    collision_box: { [key: string]: { [key: string]: number } };
     braking_power: string;
+    burner: Burner;
+    close_sound: Sound;
+    collision_box: { [key: string]: { [key: string]: number } };
+    consumption: string;
+    corpse: string;
     crash_trigger: CrashTrigger;
+    dying_explosion: string;
+    effectivity: number;
+    energy_per_hit_point: number;
+    flags: { [key: string]: string };
+    friction: number;
+    guns: Guns;
+    icon: string;
+    icon_size: number;
+    inventory_size: number;
+    light: Animation;
+    max_health: number;
+    minable: Minable;
+    mined_sound: Sound;
+    name: string;
+    open_sound: Sound;
+    render_layer: string;
+    resistances: { [key: string]: CarResistance };
+    rotation_speed: number;
+    selection_box: { [key: string]: { [key: string]: number } };
+    sound_minimum_speed: number;
+    sound_no_fuel: Sound;
+    stop_trigger: Animation;
+    stop_trigger_speed: number;
+    turret_animation: Animation;
+    turret_rotation_speed: number;
+    type: string;
+    vehicle_impact_sound: Sound;
+    weight: number;
+    working_sound: Animation;
 }
 
 export interface CrashTrigger {
-    type: string;
     sound: Sound;
+    type: string;
 }
 
 export interface Guns {
@@ -119,51 +119,51 @@ export interface Guns {
 }
 
 export interface CarResistance {
-    type: string;
-    percent: number;
     decrease?: number;
+    percent: number;
+    type: string;
 }
 
 export interface Tank {
-    type: string;
-    rotation_speed: number;
-    mined_sound: Sound;
-    open_sound: Sound;
-    selection_box: { [key: string]: { [key: string]: number } };
-    turret_animation: Animation;
-    burner: Burner;
-    corpse: string;
     alert_icon_shift: { [key: string]: number };
-    max_health: number;
-    icon: string;
-    flags: { [key: string]: string };
-    stop_trigger_speed: number;
-    weight: number;
-    terrain_friction_modifier: number;
-    icon_size: number;
-    drawing_box: { [key: string]: { [key: string]: number } };
-    sound_minimum_speed: number;
-    effectivity: number;
-    sound_no_fuel: Sound;
-    energy_per_hit_point: number;
-    light: Animation;
-    guns: { [key: string]: string };
-    immune_to_tree_impacts: boolean;
-    stop_trigger: Animation;
-    inventory_size: number;
-    tank_driving: boolean;
+    animation: Animation;
+    braking_power: string;
+    burner: Burner;
     close_sound: Sound;
-    name: string;
-    resistances: { [key: string]: BobTank2_Resistance };
-    working_sound: Animation;
-    dying_explosion: string;
-    vehicle_impact_sound: Sound;
+    collision_box: { [key: string]: { [key: string]: number } };
     consumption: string;
+    corpse: string;
+    drawing_box: { [key: string]: { [key: string]: number } };
+    dying_explosion: string;
+    effectivity: number;
+    energy_per_hit_point: number;
+    flags: { [key: string]: string };
+    friction: number;
+    guns: { [key: string]: string };
+    icon: string;
+    icon_size: number;
+    immune_to_tree_impacts: boolean;
+    inventory_size: number;
+    light: Animation;
+    max_health: number;
+    minable: Minable;
+    mined_sound: Sound;
+    name: string;
+    open_sound: Sound;
+    resistances: { [key: string]: BobTank2_Resistance };
+    rotation_speed: number;
+    selection_box: { [key: string]: { [key: string]: number } };
+    sound_minimum_speed: number;
+    sound_no_fuel: Sound;
+    stop_trigger: Animation;
+    stop_trigger_speed: number;
+    tank_driving: boolean;
+    terrain_friction_modifier: number;
+    turret_animation: Animation;
     turret_return_timeout: number;
     turret_rotation_speed: number;
-    animation: Animation;
-    minable: Minable;
-    collision_box: { [key: string]: { [key: string]: number } };
-    friction: number;
-    braking_power: string;
+    type: string;
+    vehicle_impact_sound: Sound;
+    weight: number;
+    working_sound: Animation;
 }

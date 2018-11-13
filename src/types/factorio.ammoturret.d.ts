@@ -1,35 +1,35 @@
 export interface AmmoTurret {
-    name: string;
-    type: string;
-    icon: string;
-    icon_size: number;
-    minable: Minable;
-    fast_replaceable_group: string;
-    flags: Flag[];
-    max_health: number;
-    healing_per_tick: number;
-    repair_speed_modifier: number;
-    flammability: number;
+    attack_parameters: AttackParameters;
+    attacking_speed: number;
+    automated_ammo_count: number;
+    call_for_help_radius: number;
     corpse: string;
     dying_explosion: string;
-    rotation_speed: number;
+    fast_replaceable_group: string;
+    flags: Flag[];
+    flammability: number;
     folding_speed: number;
-    attacking_speed: number;
-    preparing_speed: number;
-    call_for_help_radius: number;
-    automated_ammo_count: number;
+    healing_per_tick: number;
+    icon: string;
+    icon_size: number;
     inventory_size: number;
-    attack_parameters: AttackParameters;
+    max_health: number;
+    minable: Minable;
+    name: string;
+    preparing_speed: number;
+    repair_speed_modifier: number;
+    rotation_speed: number;
     title: string;
+    type: string;
 }
 
 export interface AttackParameters {
-    type: string;
     ammo_category: string;
     cooldown: number;
+    damage_modifier?: number;
     projectile_creation_distance: number;
     range: number;
-    damage_modifier?: number;
+    type: string;
 }
 
 export enum Flag {

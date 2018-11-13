@@ -1,18 +1,18 @@
 export interface TransportBelt {
-    name: string;
-    type: string;
-    icon: string;
-    icon_size: number;
-    minable: Minable;
+    corpse: string;
     fast_replaceable_group: string;
     flags: Flag[];
-    max_health: number;
-    healing_per_tick: number;
-    repair_speed_modifier: number;
     flammability: number;
-    corpse: string;
+    healing_per_tick: number;
+    icon: string;
+    icon_size: number;
+    max_health: number;
+    minable: Minable;
+    name: string;
+    repair_speed_modifier: number;
     speed: number;
     title: string;
+    type: string;
 }
 
 export enum Flag {
@@ -21,7 +21,7 @@ export enum Flag {
 }
 
 export interface Minable {
-    mining_time: number;
     hardness: number;
+    mining_time: number;
     result: string;
 }

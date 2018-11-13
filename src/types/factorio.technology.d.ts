@@ -1,25 +1,25 @@
 import {PrototypeHasIcon} from "./factorio.prototype";
 
 export interface Technology extends PrototypeHasIcon {
-    unit: Unit;
     effects: Effect[];
-    upgrade: boolean;
-    prerequisites: string[];
-    max_level: null | string;
-    level: number | null;
     enabled: boolean;
+    level: number | null;
+    max_level: null | string;
+    prerequisites: string[];
     title: string;
+    unit: Unit;
+    upgrade: boolean;
 }
 
 export interface Effect {
-    type: string;
-    modifier: boolean | number | null;
     ammo_category: null | string;
-    item: null;
     count: null;
-    turret_id: null | string;
-    recipe: null | string;
     effect_description: null;
+    item: null;
+    modifier: boolean | number | null;
+    recipe: null | string;
+    turret_id: null | string;
+    type: string;
 }
 
 // export enum EffectType {
@@ -46,23 +46,23 @@ export interface Effect {
 
 export interface Icon {
     icon: string;
-    tint: null;
     scale: null;
     shift: null;
+    tint: null;
 }
 
 export interface Unit {
     count: number;
-    time: number;
-    ingredients: Ingredient[];
     count_formula: null | string;
+    ingredients: Ingredient[];
+    time: number;
 }
 
 export interface Ingredient {
-    type: string;
-    name: string;
     amount: number;
-    amount_min: null;
     amount_max: null;
+    amount_min: null;
+    name: string;
     probability: null;
+    type: string;
 }

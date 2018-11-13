@@ -32,8 +32,8 @@ export enum AllowedEffect {
 }
 
 export interface CloseSoundClass {
-    volume: number;
     filename: Filename;
+    volume: number;
 }
 
 export enum Filename {
@@ -42,15 +42,15 @@ export enum Filename {
 }
 
 export interface EnergySource {
-    type: EnergySourceType;
-    emissions: number;
-    render_no_power_icon: boolean;
-    render_no_network_icon: boolean;
-    usage_priority?: UsagePriority;
     connections: any[];
-    fuel_inventory_size?: number;
     effectivity?: number;
+    emissions: number;
     fuel_category?: string;
+    fuel_inventory_size?: number;
+    render_no_network_icon: boolean;
+    render_no_power_icon: boolean;
+    type: EnergySourceType;
+    usage_priority?: UsagePriority;
 }
 
 export enum EnergySourceType {
@@ -70,17 +70,17 @@ export enum Flag {
 }
 
 export interface FluidBox {
-    production_type: ProductionTypeEnum;
     base_area?: number;
+    base_level: number;
     pipe_connections: FluidBoxPipeConnection[];
     pipe_covers?: PipeCovers;
-    base_level: number;
     pipe_picture?: PipePicture;
+    production_type: ProductionTypeEnum;
 }
 
 export interface FluidBoxPipeConnection {
-    type?: ProductionTypeEnum;
     position: number[];
+    type?: ProductionTypeEnum;
 }
 
 export enum ProductionTypeEnum {
@@ -90,9 +90,9 @@ export enum ProductionTypeEnum {
 
 export interface PipeCovers {
     east: PipeCoversEast;
-    west: PipeCoversEast;
     north: PipeCoversEast;
     south: PipeCoversEast;
+    west: PipeCoversEast;
 }
 
 export interface PipeCoversEast {
@@ -100,13 +100,13 @@ export interface PipeCoversEast {
 }
 
 export interface Layer1 {
-    hr_version?: Layer1;
-    height: number;
-    width: number;
-    filename: string;
-    priority: EastPriority;
     draw_as_shadow?: boolean;
+    filename: string;
+    height: number;
+    hr_version?: Layer1;
+    priority: EastPriority;
     scale?: number;
+    width: number;
 }
 
 export enum EastPriority {
@@ -115,36 +115,36 @@ export enum EastPriority {
 
 export interface PipePicture {
     east: HrVersionClass;
-    west: HrVersionClass;
     north: HrVersionClass;
     south: HrVersionClass;
+    west: HrVersionClass;
 }
 
 export interface HrVersionClass {
-    shift: number[];
-    height: number;
-    width: number;
     filename: string;
-    priority: EastPriority;
+    height: number;
     hr_version?: HrVersionClass;
+    priority: EastPriority;
     scale?: number;
+    shift: number[];
+    width: number;
 }
 
 export interface FluidBoxesClass {
     "1": The1;
-    off_when_no_fluid_recipe: boolean;
     "2"?: The1;
     "3"?: The3;
     "4"?: The3;
+    off_when_no_fluid_recipe: boolean;
 }
 
 export interface The1 {
-    production_type: ProductionTypeEnum;
-    pipe_picture?: PipePicture;
-    pipe_connections: FluidBoxPipeConnection[];
-    base_level: number;
-    pipe_covers: PipeCovers;
     base_area?: number;
+    base_level: number;
+    pipe_connections: FluidBoxPipeConnection[];
+    pipe_covers: PipeCovers;
+    pipe_picture?: PipePicture;
+    production_type: ProductionTypeEnum;
     secondary_draw_orders?: SecondaryDrawOrders;
 }
 
@@ -153,10 +153,10 @@ export interface SecondaryDrawOrders {
 }
 
 export interface The3 {
-    production_type: string;
+    base_level: number;
     pipe_connections: The3_PipeConnection[];
     pipe_covers: PipeCovers;
-    base_level: number;
+    production_type: string;
 }
 
 export interface The3_PipeConnection {
@@ -168,16 +168,16 @@ export interface IdleAnimation {
 }
 
 export interface IdleAnimationLayer {
-    line_length: number;
-    hr_version?: IdleAnimationLayer;
+    draw_as_shadow?: boolean;
+    filename: string;
     frame_count: number;
     height: number;
-    width: number;
-    filename: string;
+    hr_version?: IdleAnimationLayer;
+    line_length: number;
     priority: Priority1;
-    shift: number[];
-    draw_as_shadow?: boolean;
     scale?: number;
+    shift: number[];
+    width: number;
 }
 
 export enum Priority1 {
@@ -185,9 +185,9 @@ export enum Priority1 {
 }
 
 export interface Minable {
+    hardness?: number;
     mining_time: number;
     result: string;
-    hardness?: number;
 }
 
 export interface ModuleSpecification {
@@ -196,7 +196,7 @@ export interface ModuleSpecification {
 
 export interface WorkingVisualisationsDisabled {
     east_position: number[];
-    south_position: number[];
     north_position: number[];
+    south_position: number[];
     west_position: number[];
 }

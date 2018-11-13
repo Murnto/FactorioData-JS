@@ -1,21 +1,21 @@
 export interface Generator {
-    name: string;
-    type: Type;
-    icon: string;
-    icon_size: number;
-    minable: Minable;
-    fast_replaceable_group?: FastReplaceableGroup;
-    flags: Flag[];
-    max_health: number;
-    healing_per_tick: number;
-    repair_speed_modifier: number;
-    flammability: number;
     corpse: Corpse;
     dying_explosion?: DyingExplosion;
-    maximum_temperature: number;
     effectivity: number;
+    fast_replaceable_group?: FastReplaceableGroup;
+    flags: Flag[];
+    flammability: number;
     fluid_usage_per_tick: number;
+    healing_per_tick: number;
+    icon: string;
+    icon_size: number;
+    max_health: number;
+    maximum_temperature: number;
+    minable: Minable;
+    name: string;
+    repair_speed_modifier: number;
     title: string;
+    type: Type;
 }
 
 export enum Corpse {

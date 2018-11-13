@@ -1,18 +1,18 @@
 export interface Pipe {
-    name: string;
-    type: FastReplaceableGroup;
-    icon: string;
-    icon_size: number;
-    minable: Minable;
+    corpse: Corpse;
     fast_replaceable_group: FastReplaceableGroup;
     flags: Flag[];
-    max_health: number;
-    healing_per_tick: number;
-    repair_speed_modifier: number;
     flammability: number;
-    corpse: Corpse;
     fluid_box: FluidBox;
+    healing_per_tick: number;
+    icon: string;
+    icon_size: number;
+    max_health: number;
+    minable: Minable;
+    name: string;
+    repair_speed_modifier: number;
     title: string;
+    type: FastReplaceableGroup;
 }
 
 export interface PipeToGround extends Pipe {
@@ -37,12 +37,12 @@ export interface FluidBox {
 }
 
 export interface PipeConnection {
-    position: number[];
     max_underground_distance?: number;
+    position: number[];
 }
 
 export interface Minable {
-    mining_time: number;
     hardness: number;
+    mining_time: number;
     result: string;
 }

@@ -1,21 +1,21 @@
 export interface Container {
-    name: string;
-    type: Type;
-    icon: string;
-    icon_size: number;
-    minable?: Minable;
+    corpse?: string;
     fast_replaceable_group?: string;
     flags: Flag[];
-    max_health: number;
-    healing_per_tick: number;
-    repair_speed_modifier: number;
     flammability: number;
-    corpse?: string;
+    healing_per_tick: number;
+    icon: string;
+    icon_size: number;
     inventory_size: number;
-    title: string;
-    order?: string;
-    subgroup?: string;
     localised_name?: string[];
+    max_health: number;
+    minable?: Minable;
+    name: string;
+    order?: string;
+    repair_speed_modifier: number;
+    subgroup?: string;
+    title: string;
+    type: Type;
 }
 
 export enum Flag {
@@ -25,10 +25,10 @@ export enum Flag {
 }
 
 export interface Minable {
-    mining_time: number;
-    result: string;
     count?: number;
     mining_particle?: string;
+    mining_time: number;
+    result: string;
 }
 
 export enum Type {

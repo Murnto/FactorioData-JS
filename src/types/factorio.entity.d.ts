@@ -16,15 +16,15 @@ export interface EntityWithHealth extends Entity {
 }
 
 export interface EnergySource {
-    type: string;
-    emissions: number;
-    render_no_power_icon: boolean;
-    render_no_network_icon: boolean;
-    usage_priority: string;
     connections: any[];
-    fuel_inventory_size: number;
     effectivity: number;
+    emissions: number;
     fuel_category: string;
+    fuel_inventory_size: number;
+    render_no_network_icon: boolean;
+    render_no_power_icon: boolean;
+    type: string;
+    usage_priority: string;
 }
 
 export interface Minable {
@@ -38,23 +38,23 @@ export interface Sound {
 }
 
 export interface FluidBox {
-    production_type: string;
     base_area?: number;
+    base_level: number;
     pipe_connections: PipeConnection[];
     pipe_covers: PipeCovers;
-    base_level: number;
+    production_type: string;
 }
 
 export interface PipeConnection {
-    type?: string;
     position: number[];
+    type?: string;
 }
 
 export interface PipeCovers {
     east: PipeCoverLayers;
-    west: PipeCoverLayers;
     north: PipeCoverLayers;
     south: PipeCoverLayers;
+    west: PipeCoverLayers;
 }
 
 export interface PipeCoverLayers {
@@ -62,11 +62,11 @@ export interface PipeCoverLayers {
 }
 
 export interface Layer {
-    hr_version?: Layer;
-    height: number;
-    width: number;
-    filename: string;
-    priority: string;
     draw_as_shadow?: boolean;
+    filename: string;
+    height: number;
+    hr_version?: Layer;
+    priority: string;
     scale?: number;
+    width: number;
 }

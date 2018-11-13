@@ -1,62 +1,62 @@
 export interface Boiler {
-    name: string;
-    type: string;
-    icon: string;
-    icon_size: number;
-    minable: Minable;
+    burner: Burner;
+    burning_cooldown: number;
+    corpse: string;
+    energy_consumption: string;
     fast_replaceable_group?: string;
     flags: Flag[];
-    max_health: number;
-    healing_per_tick: number;
-    repair_speed_modifier: number;
     flammability: number;
-    corpse: string;
+    healing_per_tick: number;
+    icon: string;
+    icon_size: number;
+    max_health: number;
+    minable: Minable;
+    name: string;
+    repair_speed_modifier: number;
     target_temperature: number;
-    burning_cooldown: number;
-    energy_consumption: string;
-    burner: Burner;
     title: string;
+    type: string;
 }
 
 export interface Burner {
-    type: string;
-    emissions?: number;
-    render_no_power_icon: boolean;
-    render_no_network_icon: boolean;
-    fuel_inventory_size?: number;
-    effectivity?: number;
-    fuel_category?: string;
     connections: Connection[];
+    effectivity?: number;
+    emissions?: number;
+    fuel_category?: string;
+    fuel_inventory_size?: number;
+    input_priority?: string;
     max_temperature?: number;
-    specific_heat?: string;
     max_transfer?: string;
     pipe_covers?: PipeCovers;
+    render_no_network_icon: boolean;
+    render_no_power_icon: boolean;
+    specific_heat?: string;
+    type: string;
     usage_priority?: string;
-    input_priority?: string;
 }
 
 export interface Connection {
-    position: number[];
     direction: number;
+    position: number[];
 }
 
 export interface PipeCovers {
     east: East;
-    west: East;
     north: East;
     south: East;
+    west: East;
 }
 
 export interface East {
+    filename: Filename;
+    frame_count: number;
+    height: number;
+    hr_version?: East;
     line_length: number;
     priority: Priority;
-    hr_version?: East;
     scale: number;
-    frame_count: number;
-    x: number;
     width: number;
-    filename: Filename;
-    height: number;
+    x: number;
 }
 
 export enum Filename {
@@ -74,7 +74,7 @@ export enum Flag {
 }
 
 export interface Minable {
-    mining_time: number;
     hardness?: number;
+    mining_time: number;
     result: string;
 }

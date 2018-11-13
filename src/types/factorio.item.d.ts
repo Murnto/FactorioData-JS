@@ -1,31 +1,31 @@
 import {PrototypeHasIcon} from "./factorio.prototype";
 
 export interface Item extends PrototypeHasIcon {
-    subgroup: string;
-    stack_size: number;
-    flags: Flag[];
-    place_result: undefined | string;
-    healing_value: undefined;
-    place_as_tile: PlaceAsTile | undefined;
-    placed_as_equipment_result: undefined | string;
-    default_request_amount: number | undefined;
     burnt_result: undefined | string;
-    rocket_launch_product: RocketLaunchProduct | undefined;
-    damage_radius: number | undefined;
-    trigger_radius: number | undefined;
-    fuel_value: undefined | string;
-    fuel_category: FuelCategory | undefined;
-    fuel_top_speed_multiplier: number | undefined;
-    fuel_acceleration_multiplier: number | undefined;
-    effect: Effect | undefined;
-    tier: number | undefined;
     category: Category | undefined;
-    limitation_message_key: undefined | string;
-    limitation: string[] | undefined;
-    fuel_emissions_multiplier: number | undefined;
-    flag_goes_to_quickbar: boolean;
+    damage_radius: number | undefined;
+    default_request_amount: number | undefined;
+    effect: Effect | undefined;
     flag_goes_to_main_inventory: boolean;
+    flag_goes_to_quickbar: boolean;
     flag_hidden: boolean;
+    flags: Flag[];
+    fuel_acceleration_multiplier: number | undefined;
+    fuel_category: FuelCategory | undefined;
+    fuel_emissions_multiplier: number | undefined;
+    fuel_top_speed_multiplier: number | undefined;
+    fuel_value: undefined | string;
+    healing_value: undefined;
+    limitation: string[] | undefined;
+    limitation_message_key: undefined | string;
+    place_as_tile: PlaceAsTile | undefined;
+    place_result: undefined | string;
+    placed_as_equipment_result: undefined | string;
+    rocket_launch_product: RocketLaunchProduct | undefined;
+    stack_size: number;
+    subgroup: string;
+    tier: number | undefined;
+    trigger_radius: number | undefined;
 }
 
 export enum Category {
@@ -35,10 +35,10 @@ export enum Category {
 }
 
 export interface Effect {
-    speed?: Consumption;
     consumption: Consumption;
-    productivity?: Consumption;
     pollution?: Consumption;
+    productivity?: Consumption;
+    speed?: Consumption;
 }
 
 export interface Consumption {
@@ -68,10 +68,10 @@ export enum Condition {
 }
 
 export interface RocketLaunchProduct {
-    type: string;
-    name: string;
     amount: number;
-    amount_min: undefined;
     amount_max: undefined;
+    amount_min: undefined;
+    name: string;
     probability: undefined;
+    type: string;
 }

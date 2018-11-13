@@ -1,27 +1,27 @@
 export interface SolarPanel {
-    name: string;
-    type: string;
-    icon: string;
-    icon_size: number;
-    minable: Minable;
+    corpse: string;
+    energy_source: EnergySource;
     fast_replaceable_group: string;
     flags: Flag[];
-    max_health: number;
-    healing_per_tick: number;
-    repair_speed_modifier: number;
     flammability: number;
-    corpse: string;
+    healing_per_tick: number;
+    icon: string;
+    icon_size: number;
+    max_health: number;
+    minable: Minable;
+    name: string;
     production: string;
-    energy_source: EnergySource;
+    repair_speed_modifier: number;
     title: string;
+    type: string;
 }
 
 export interface EnergySource {
-    type: string;
-    render_no_power_icon: boolean;
-    render_no_network_icon: boolean;
-    usage_priority: string;
     connections: any[];
+    render_no_network_icon: boolean;
+    render_no_power_icon: boolean;
+    type: string;
+    usage_priority: string;
 }
 
 export enum Flag {
@@ -31,7 +31,7 @@ export enum Flag {
 }
 
 export interface Minable {
-    mining_time: number;
     hardness: number;
+    mining_time: number;
     result: string;
 }

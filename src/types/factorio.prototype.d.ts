@@ -8,24 +8,24 @@ export interface Prototype {
 }
 
 export interface PrototypeHasIcon extends Prototype {
+    dark_background_icon?: string;
     icon?: string;
     icon_size?: number;
     icons?: Icon[];
-    dark_background_icon?: string;
 }
 
 export interface Icon {
     icon: string;
-    tint?: Tint | undefined;
-    shift?: number[] | undefined;
     scale?: number | undefined;
+    shift?: number[] | undefined;
+    tint?: Tint | undefined;
 }
 
 export interface Tint {
-    g: number;
-    r: number;
     a?: number;
     b: number;
+    g: number;
+    r: number;
 }
 
 export type PrototypeType = string;

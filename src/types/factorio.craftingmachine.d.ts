@@ -1,41 +1,41 @@
 export interface CraftingMachine {
-    name: string;
-    type: CraftingMachineType;
-    icon_size: number;
-    icons?: Icon[];
-    minable: Minable;
-    fast_replaceable_group?: string;
-    flags: Flag[];
-    max_health: number;
-    healing_per_tick: number;
-    repair_speed_modifier: number;
-    flammability: number;
+    alert_icon_shift?: number[];
+    allowed_effects?: AllowedEffect[];
+    always_draw_idle_animation?: boolean;
+    close_sound?: CloseSoundClass;
     corpse: Corpse;
-    dying_explosion?: DyingExplosion;
     crafting_categories: string[];
     crafting_speed: number;
+    drawing_box?: Array<number[]>;
+    dying_explosion?: DyingExplosion;
     energy_source: EnergySource;
     energy_usage: string;
-    module_specification?: ModuleSpecification;
-    allowed_effects?: AllowedEffect[];
+    fast_replaceable_group?: string;
+    flags: Flag[];
+    flammability: number;
     fluid_boxes?: FluidBox[] | FluidBoxesClass;
-    ingredient_count?: number;
-    title: string;
-    icon?: string;
-    result_inventory_size?: number;
-    source_inventory_size?: number;
-    open_sound?: CloseSoundClass;
-    close_sound?: CloseSoundClass;
-    repair_sound?: MinedSoundClass;
-    pipe_covers?: PipeCovers;
-    mined_sound?: MinedSoundClass;
-    order?: string;
-    drawing_box?: Array<number[]>;
     has_backer_name?: boolean;
-    scale_entity_info_icon?: boolean;
-    alert_icon_shift?: number[];
+    healing_per_tick: number;
+    icon?: string;
+    icon_size: number;
+    icons?: Icon[];
     idle_animation?: IdleAnimation;
-    always_draw_idle_animation?: boolean;
+    ingredient_count?: number;
+    max_health: number;
+    minable: Minable;
+    mined_sound?: MinedSoundClass;
+    module_specification?: ModuleSpecification;
+    name: string;
+    open_sound?: CloseSoundClass;
+    order?: string;
+    pipe_covers?: PipeCovers;
+    repair_sound?: MinedSoundClass;
+    repair_speed_modifier: number;
+    result_inventory_size?: number;
+    scale_entity_info_icon?: boolean;
+    source_inventory_size?: number;
+    title: string;
+    type: CraftingMachineType;
     working_visualisations_disabled?: WorkingVisualisationsDisabled[];
 }
 
@@ -47,8 +47,8 @@ export enum AllowedEffect {
 }
 
 export interface CloseSoundClass {
-    volume: number;
     filename: CloseSoundFilename;
+    volume: number;
 }
 
 export enum CloseSoundFilename {
@@ -68,15 +68,15 @@ export enum DyingExplosion {
 }
 
 export interface EnergySource {
-    type: EnergySourceType;
-    emissions: number;
-    render_no_power_icon: boolean;
-    render_no_network_icon: boolean;
-    usage_priority?: UsagePriority;
     connections: any[];
-    fuel_inventory_size?: number;
     effectivity?: number;
+    emissions: number;
     fuel_category?: string;
+    fuel_inventory_size?: number;
+    render_no_network_icon: boolean;
+    render_no_power_icon: boolean;
+    type: EnergySourceType;
+    usage_priority?: UsagePriority;
 }
 
 export enum EnergySourceType {
@@ -96,12 +96,12 @@ export enum Flag {
 }
 
 export interface FluidBox {
-    production_type: ProductionTypeEnum;
+    base_area?: number;
+    base_level: number;
     pipe_connections: FluidBoxPipeConnection[];
     pipe_covers?: PipeCovers;
-    base_level: number;
-    base_area?: number;
     pipe_picture?: PipePicture;
+    production_type: ProductionTypeEnum;
 }
 
 export interface FluidBoxPipeConnection {
@@ -116,9 +116,9 @@ export enum ProductionTypeEnum {
 
 export interface PipeCovers {
     east: PipeCoversEast;
-    west: PipeCoversEast;
     north: PipeCoversEast;
     south: PipeCoversEast;
+    west: PipeCoversEast;
 }
 
 export interface PipeCoversEast {
@@ -126,13 +126,13 @@ export interface PipeCoversEast {
 }
 
 export interface Layer1 {
-    hr_version?: Layer1;
-    height: number;
-    width: number;
-    filename: string;
-    priority: EastPriority;
     draw_as_shadow?: boolean;
+    filename: string;
+    height: number;
+    hr_version?: Layer1;
+    priority: EastPriority;
     scale?: number;
+    width: number;
 }
 
 export enum EastPriority {
@@ -141,36 +141,36 @@ export enum EastPriority {
 
 export interface PipePicture {
     east: HrVersionClass;
-    west: HrVersionClass;
     north: HrVersionClass;
     south: HrVersionClass;
+    west: HrVersionClass;
 }
 
 export interface HrVersionClass {
-    shift: number[];
-    height: number;
-    width: number;
     filename: string;
-    priority: EastPriority;
+    height: number;
     hr_version?: HrVersionClass;
+    priority: EastPriority;
     scale?: number;
+    shift: number[];
+    width: number;
 }
 
 export interface FluidBoxesClass {
     "1": The1;
-    off_when_no_fluid_recipe: boolean;
     "2"?: The1;
     "3"?: The3;
     "4"?: The3;
+    off_when_no_fluid_recipe: boolean;
 }
 
 export interface The1 {
-    production_type: ProductionTypeEnum;
-    pipe_picture?: PipePicture;
-    pipe_connections: FluidBoxPipeConnection[];
-    base_level: number;
-    pipe_covers: PipeCovers;
     base_area?: number;
+    base_level: number;
+    pipe_connections: FluidBoxPipeConnection[];
+    pipe_covers: PipeCovers;
+    pipe_picture?: PipePicture;
+    production_type: ProductionTypeEnum;
     secondary_draw_orders?: SecondaryDrawOrders;
 }
 
@@ -179,10 +179,10 @@ export interface SecondaryDrawOrders {
 }
 
 export interface The3 {
-    production_type: string;
+    base_level: number;
     pipe_connections: The3_PipeConnection[];
     pipe_covers: PipeCovers;
-    base_level: number;
+    production_type: string;
 }
 
 export interface The3_PipeConnection {
@@ -191,16 +191,16 @@ export interface The3_PipeConnection {
 
 export interface Icon {
     icon: string;
+    scale?: number;
     shift?: number[];
     tint?: Tint;
-    scale?: number;
 }
 
 export interface Tint {
-    g: number;
-    r: number;
     a: number;
     b: number;
+    g: number;
+    r: number;
 }
 
 export interface IdleAnimation {
@@ -208,16 +208,16 @@ export interface IdleAnimation {
 }
 
 export interface IdleAnimationLayer {
-    line_length: number;
-    hr_version?: IdleAnimationLayer;
+    draw_as_shadow?: boolean;
+    filename: string;
     frame_count: number;
     height: number;
-    width: number;
-    filename: string;
+    hr_version?: IdleAnimationLayer;
+    line_length: number;
     priority: Priority1;
-    shift: number[];
-    draw_as_shadow?: boolean;
     scale?: number;
+    shift: number[];
+    width: number;
 }
 
 export enum Priority1 {
@@ -225,9 +225,9 @@ export enum Priority1 {
 }
 
 export interface Minable {
+    hardness?: number;
     mining_time: number;
     result: string;
-    hardness?: number;
 }
 
 export interface MinedSoundClass {
@@ -250,7 +250,7 @@ export enum CraftingMachineType {
 
 export interface WorkingVisualisationsDisabled {
     east_position: number[];
-    south_position: number[];
     north_position: number[];
+    south_position: number[];
     west_position: number[];
 }

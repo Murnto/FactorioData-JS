@@ -1,24 +1,24 @@
 export interface Inserter {
-    name: string;
-    type: InserterType;
-    icon: string;
-    icon_size: number;
-    minable: Minable;
-    fast_replaceable_group: FastReplaceableGroup;
-    flags: Flag[];
-    max_health: number;
-    healing_per_tick: number;
-    repair_speed_modifier: number;
-    flammability: number;
-    corpse: Corpse;
-    rotation_speed: number;
-    extension_speed: number;
     allow_custom_vectors: boolean;
-    energy_source: EnergySource;
+    corpse: Corpse;
     energy_per_movement: number;
     energy_per_rotation: number;
+    energy_source: EnergySource;
+    extension_speed: number;
+    fast_replaceable_group: FastReplaceableGroup;
+    flags: Flag[];
+    flammability: number;
     hand_size: number;
+    healing_per_tick: number;
+    icon: string;
+    icon_size: number;
+    max_health: number;
+    minable: Minable;
+    name: string;
+    repair_speed_modifier: number;
+    rotation_speed: number;
     title: string;
+    type: InserterType;
 }
 
 export enum Corpse {
@@ -26,15 +26,15 @@ export enum Corpse {
 }
 
 export interface EnergySource {
-    type: EnergySourceType;
-    render_no_power_icon: boolean;
-    render_no_network_icon: boolean;
-    usage_priority?: UsagePriority;
-    drain?: string;
     connections: any[];
-    fuel_inventory_size?: number;
+    drain?: string;
     effectivity?: number;
     fuel_category?: string;
+    fuel_inventory_size?: number;
+    render_no_network_icon: boolean;
+    render_no_power_icon: boolean;
+    type: EnergySourceType;
+    usage_priority?: UsagePriority;
 }
 
 export enum EnergySourceType {
@@ -58,8 +58,8 @@ export enum Flag {
 }
 
 export interface Minable {
-    mining_time: number;
     hardness: number;
+    mining_time: number;
     result: string;
 }
 
