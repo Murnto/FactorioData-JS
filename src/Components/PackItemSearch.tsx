@@ -5,8 +5,8 @@ import {Container, FormGroup, Input} from "reactstrap";
 import {Item} from "../types/factorio.item";
 
 interface PackItemSearchState {
-    searchResults: Item[]
     search: string
+    searchResults: Item[]
 }
 
 export class PackItemSearch extends React.Component <{ match: any, data: PackLoadedData }, PackItemSearchState> {
@@ -26,7 +26,8 @@ export class PackItemSearch extends React.Component <{ match: any, data: PackLoa
         return (
             <Container id="item-search-box">
                 <FormGroup>
-                    <Input styles={{marginTop: '20px'}} type="search" name="text" value={this.state.search} onChange={this.onSearchInput} />
+                    <Input styles={{marginTop: '20px'}} type="search" name="text" value={this.state.search}
+                           onChange={this.onSearchInput}/>
                 </FormGroup>
                 <table id="table" data-sortable="" className="sortable-theme-bootstrap"
                        data-sortable-initialized="true">

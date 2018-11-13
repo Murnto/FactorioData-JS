@@ -6,22 +6,22 @@ import {AssemblingMachine} from "./types/factorio.assemblignmachine";
 import {Furnace} from "./types/factorio.furnace";
 
 interface KnownThings {
-    furnace: {[name: string]: Furnace}
-    recipe: {[name: string]: Recipe}
-    technology: {[name: string]: Technology}
     // 'mining-drill': {[name: string]: MiningDrill}
-    'assembling-machine': {[name: string]: AssemblingMachine}
+    'assembling-machine': { [name: string]: AssemblingMachine }
+    furnace: { [name: string]: Furnace }
+    recipe: { [name: string]: Recipe }
+    technology: { [name: string]: Technology }
 
-    [type: string]: {[name: string]: Prototype}
+    [type: string]: { [name: string]: Prototype }
 }
 
 export class PackLoadedData {
-    public recipes: { [name: string]: Recipe };
-    public technologies: { [name: string]: Technology };
+    public isLoaded: boolean = false;
     public items: { [type: string]: { [name: string]: Item } };
     public loadedThings: KnownThings = {} as any;
-    public isLoaded: boolean = false;
     public packId: string;
+    public recipes: { [name: string]: Recipe };
+    public technologies: { [name: string]: Technology };
     private itemIsUsedOrProducedByRecipe: { [type: string]: { [name: string]: boolean } } = {};
     private recipesProducingCache: { [type: string]: { [name: string]: Recipe[] } } = {};
     private recipesUsedInCache: { [type: string]: { [name: string]: Recipe[] } } = {};

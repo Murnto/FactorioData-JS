@@ -8,9 +8,9 @@ export interface PassedItem<T> {
 }
 
 export interface PassedNameTypeData {
-    type: string
-    name: string
     data: PackLoadedData
+    name: string
+    type: string
 }
 
 export type Either<T> = (PassedItem<T> | PassedNameTypeData)
