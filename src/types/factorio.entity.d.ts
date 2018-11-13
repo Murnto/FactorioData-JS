@@ -1,18 +1,18 @@
 import {PrototypeHasIcon} from "./factorio.prototype";
 
 export interface Entity extends PrototypeHasIcon {
+    fast_replaceable_group?: string;
     minable: Minable;
-    fast_replaceable_group: string;
     mined_sound?: Sound;
 }
 
 export interface EntityWithHealth extends Entity {
-    max_health: number;
-    healing_per_tick: number;
-    repair_speed_modifier: number;
     corpse: string;
-    repair_sound?: Sound;
     dying_explosion?: string;
+    healing_per_tick: number;
+    max_health: number;
+    repair_sound?: Sound;
+    repair_speed_modifier: number;
 }
 
 export interface EnergySource {

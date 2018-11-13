@@ -1,17 +1,17 @@
 export interface Prototype {
-    name: string;
-    type: PrototypeType;
-    title: string | undefined;
-    order?: string;
-    localised_name: Array<string[] | string> | string | undefined;
     localised_description: Array<string[] | string> | string | undefined;
+    localised_name: Array<string[] | string> | string | undefined;
+    name: string;
+    order?: string;
+    title: string | undefined;
+    type: PrototypeType;
 }
 
 export interface PrototypeHasIcon extends Prototype {
-    icon: string | undefined;
-    icon_size: number | undefined;
-    icons: Icon[] | undefined;
-    dark_background_icon: string | undefined;
+    icon?: string;
+    icon_size?: number;
+    icons?: Icon[];
+    dark_background_icon?: string;
 }
 
 export interface Icon {
