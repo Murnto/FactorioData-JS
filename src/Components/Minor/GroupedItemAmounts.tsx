@@ -31,7 +31,7 @@ export function GroupedItemAmounts(props: { items: Ingredient[], data: PackLoade
                     }
 
                     return (
-                        <PopoverItemRecipe item={item!} key={ingd.type + ":" + ingd.name}>
+                        <PopoverItemRecipe item={item!} data={data} key={ingd.type + ":" + ingd.name}>
                             {inner}
                         </PopoverItemRecipe>
                     )

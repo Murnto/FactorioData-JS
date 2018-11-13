@@ -21,7 +21,7 @@ export class PackComponentTest extends React.Component <{ match: any, data: Pack
         return (
             <Container>
                 {this.renderPopoverTest()}
-                <PopoverItemRecipe item={item!}>
+                <PopoverItemRecipe data={data} item={item!}>
                     <PrototypeIcon item={item as any} data={data}/>
                 </PopoverItemRecipe>
                 <PrototypeLink type="item" name="iron-plate" data={data}/>
