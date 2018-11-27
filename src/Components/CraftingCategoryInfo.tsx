@@ -71,11 +71,24 @@ export class CraftingCategoryInfo extends React.Component <CraftingCategoryInfoP
                             <td><PrototypeLink item={displayObj} data={data}/></td>
                             <td>{object.crafting_speed}</td>
                             <td>{object.energy_usage}</td>
+                            <td><a href="javascript:void(0)" onClick={this.addCrafterToGraph(object.name)}>Add</a></td>
                         </tr>
                     }
                 )}
                 </tbody>
             </table>
         </Container>
+    }
+
+    private addCrafterToGraph(name: string) {
+        return () => {
+            fetch('http://127.0.0.1:8500/add_crafter', {
+                body: name,
+                method: 'POST',
+                mode: 'no-cors',
+            }).then((r) => {
+                console.log(r.ok, r.status, r)
+            })
+        };
     }
 }
