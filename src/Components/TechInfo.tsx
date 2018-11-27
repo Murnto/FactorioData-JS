@@ -143,7 +143,7 @@ export class TechInfo extends React.Component <{ match: any, data: PackLoadedDat
             otherEffects,
             recipeUnlockedBy,
             tech,
-            techAllows: data.technologiesAllowed[tech.name],
+            techAllows: data.technologiesAllowed[tech.name] || [],
             techRequired,
         });
         console.timeEnd(`loadTechInfo:${techName}`);
