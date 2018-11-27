@@ -100,14 +100,10 @@ class App extends Component<{}, { isOpen: boolean, currentPack: string | null }>
                             </DropdownToggle>
                             <DropdownMenu right>
                                 <DropdownItem>
-                                    Option 1
+                                    <Link to="/pack/base-f16-normal">F16: Base</Link>
                                 </DropdownItem>
                                 <DropdownItem>
-                                    Option 2
-                                </DropdownItem>
-                                <DropdownItem divider/>
-                                <DropdownItem>
-                                    Reset
+                                    <Link to="/pack/seablock-f16-normal">F16: Seablock Pack</Link>
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
