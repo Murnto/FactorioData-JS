@@ -5,6 +5,14 @@ import {PrototypeHasIcon} from "../../types/factorio.prototype";
 
 const iconStyle: CSSProperties = {
     height: 32,
+    position: 'absolute',
+    width: 32
+};
+
+const wrapperStyle: CSSProperties = {
+    display: 'inline-flex',
+    height: 32,
+    position: 'relative',
     width: 32
 };
 
@@ -56,14 +64,22 @@ export class PrototypeIcon extends React.Component<PrototypeIconProps, {
     public render() {
         const {item} = this.state;
 
-        if (item === null || item === undefined || item.icon === undefined || item.icon === null) {
+        if (item === null || item === undefined || !(item.icon !== undefined && item.icon !== null || item.icons !== undefined && item.icons !== null)) {
             if (this.props.missingOk) {
-                return <span style={iconStyle}/>;
+                return <span style={wrapperStyle}><span style={iconStyle}/></span>
             } else {
-                return <span style={itemBrokenImage} className="item-broken-image"/>
+                return <span style={wrapperStyle}><span style={itemBrokenImage} className="item-broken-image"/></span>
             }
         } else {
-            return <img style={iconStyle} className="factorio-icon" src={item !== null ? item.icon : ""}/>
+            if (item.icons !== null && item.icons !== undefined) {
+                return <span style={wrapperStyle}>
+                    {item.icons.map((i, idx) =>
+                        <img key={idx} style={iconStyle} className="factorio-icon" src={i.icon}/>
+                    )}
+                </span>
+            } else {
+                return <span style={wrapperStyle}><img style={iconStyle} className="factorio-icon" src={item !== null ? item.icon : ""}/></span>
+            }
         }
     }
 }
