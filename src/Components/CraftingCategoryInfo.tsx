@@ -60,7 +60,7 @@ export class CraftingCategoryInfo extends React.Component <CraftingCategoryInfoP
                         let displayObj: PrototypeHasIcon = object;
 
                         if (object.minable !== undefined && object.minable.result !== undefined) {
-                            const resolved = data.findItem("item", object.minable.result)
+                            const resolved = data.findItem("item", object.minable.result);
 
                             if (resolved !== null) {
                                 displayObj = resolved
