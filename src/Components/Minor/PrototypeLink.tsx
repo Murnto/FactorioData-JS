@@ -6,7 +6,11 @@ import {PackLoadedData} from "../../PackLoadedData";
 import {PrototypeIcon} from "./PrototypeIcon";
 import {CSSProperties} from "react";
 
-type PrototypeLinkProps = Either<PrototypeHasIcon> & { data: PackLoadedData, hideName?: boolean }
+type PrototypeLinkProps = Either<PrototypeHasIcon> & {
+    data: PackLoadedData
+    hideIcon?: boolean
+    hideName?: boolean
+}
 
 const linkStyle: CSSProperties = {
     marginLeft: 4,
@@ -50,7 +54,7 @@ export class PrototypeLink extends React.Component<PrototypeLinkProps, {
 
     public render() {
         const {item} = this.state;
-        const hideName = this.props.hideName || false;
+        const {hideIcon, hideName, data} = this.props;
 
         if (item === null || item === undefined) {
             return <span>Error</span>
@@ -58,7 +62,7 @@ export class PrototypeLink extends React.Component<PrototypeLinkProps, {
 
         return <span>
             <Link to={`/pack/${this.props.data.packId}/i/${item.type}/${item.name}`}>
-                <PrototypeIcon item={item}/>
+                {!hideIcon && <PrototypeIcon item={item}/>}
                 {!hideName && <span style={linkStyle}>{item.title}</span>}
             </Link>
         </span>
