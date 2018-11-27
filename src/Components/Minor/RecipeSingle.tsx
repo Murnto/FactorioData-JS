@@ -10,6 +10,7 @@ import {Link} from "react-router-dom";
 export class RecipeSingle extends React.Component<{
     recipe: Recipe
     data: PackLoadedData
+    noTechUnlocks?: boolean
 }, {
     techUnlockedBy: Technology[] | null
 }> {
@@ -22,8 +23,11 @@ export class RecipeSingle extends React.Component<{
     }
 
     public componentDidMount() {
-        const {recipe, data} = this.props;
-        this.setState({techUnlockedBy: data.technologyUnlockedBy(recipe)})
+        const {recipe, data, noTechUnlocks} = this.props;
+
+        if (!noTechUnlocks) {
+            this.setState({techUnlockedBy: data.technologyUnlockedBy(recipe)})
+        }
     }
 
     // public componentDidUpdate() {
@@ -32,10 +36,10 @@ export class RecipeSingle extends React.Component<{
     // }
 
     public render() {
-        const {recipe, data} = this.props;
+        const {recipe, data, noTechUnlocks} = this.props;
         const {techUnlockedBy} = this.state;
 
-        if (techUnlockedBy === null) {
+        if (!noTechUnlocks && techUnlockedBy === null) {
             return <tr/>
         }
 
@@ -48,11 +52,13 @@ export class RecipeSingle extends React.Component<{
                 <td><GroupedItemAmounts data={data} items={recipe.ingredients}/></td>
                 <td><GroupedItemAmounts data={data} items={recipe.results}/></td>
                 <td>{recipe.energy_required}</td>
+                {!noTechUnlocks &&
                 <td>
                     {techUnlockedBy!.map(object =>
                         <PrototypeLink key={object.name} to={data.link.toTech(object)} data={data} item={object}/>
                     )}
                 </td>
+                }
             </tr>
         )
     }
