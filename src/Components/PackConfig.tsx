@@ -42,26 +42,13 @@ export default class PackConfig extends React.Component
     }
 
     public async componentDidMount() {
-        const packId = this.props.match.params.packId;
-        const promises: Array<Promise<void>> = [];
+        this.initPack();
+    }
 
-        promises.push(this.loadDataItem("recipes"));
-        promises.push(this.loadDataItem("items"));
-        promises.push(this.loadDataItem("technologies"));
-        promises.push(this.loadDataItem("furnaces"));
-        promises.push(this.loadDataItem("assemblingMachines"));
-        promises.push(this.loadDataItem("miningDrills"));
-
-        this.props.onPackChange(packId);
-
-        await Promise.all(promises);
-
-        this.setState((prevState => {
-            prevState.data.packId = packId;
-            prevState.data.isLoaded = true;
-            prevState.data.onFinishLoadingAll();
-            return {isLoaded: true};
-        }))
+    public componentDidUpdate(prevProps: PackConfigProps, prevState: PackConfigState) {
+        if (prevProps.match.params.packId !== this.props.match.params.packId) {
+            this.initPack();
+        }
     }
 
     public render() {
@@ -77,15 +64,47 @@ export default class PackConfig extends React.Component
 
         return (
             <Switch>
-                <PropsRoute exact path={`${match.path}`} component={PackItemSearch} data={this.state.data}/>
+                <PropsRoute exact path={`${match.path}`} component={PackItemSearch} data={data}/>
                 <PropsRoute path={`${match.path}/info`} component={PackInfo}/>
-                <PropsRoute path={`${match.path}/test`} component={PackComponentTest} data={this.state.data}/>
-                <PropsRoute exact path={`${match.path}/tech`} component={PackTechList}  data={this.state.data}/>
-                <PropsRoute path={`${match.path}/craftingCat/:category`} component={CraftingCategoryInfo} data={this.state.data}/>
-                <PropsRoute path={`${match.path}/i/:itemType/:itemName`} component={PackItemInfo} data={this.state.data}/>
+                <PropsRoute path={`${match.path}/test`} component={PackComponentTest} data={data}/>
+                <PropsRoute exact path={`${match.path}/tech`} component={PackTechList} data={data}/>
+                {/*<PropsRoute exact path={`${match.path}/graph`} component={PackItemGraph} data={data}/>*/}
+                {/*<PropsRoute exact path={`${match.path}/graph2`} component={PackItemGraphGL} data={data}/>*/}
                 <PropsRoute path={`${match.path}/tech/:techName`} component={TechInfo}  data={data}/>
+                <PropsRoute path={`${match.path}/craftingCat/:category`} component={CraftingCategoryInfo} data={data}/>
+                <PropsRoute path={`${match.path}/i/:itemType/:itemName`} component={PackItemInfo} data={data}/>
             </Switch>
         )
+    }
+
+    private async initPack() {
+        const data = new PackLoadedData;
+        this.setState({
+            data,
+            isLoaded: false
+        });
+
+        const packId = this.props.match.params.packId;
+        const promises: Array<Promise<void>> = [];
+
+        promises.push(this.loadDataItem("recipes"));
+        promises.push(this.loadDataItem("items"));
+        promises.push(this.loadDataItem("technologies"));
+        promises.push(this.loadDataItem("furnaces"));
+        promises.push(this.loadDataItem("assemblingMachines"));
+        promises.push(this.loadDataItem("miningDrills"));
+
+        this.props.onPackChange(packId);
+
+        await Promise.all(promises);
+
+        data.packId = packId;
+        data.isLoaded = true;
+        data.onFinishLoadingAll();
+
+        this.setState({
+            isLoaded: true,
+        })
     }
 
     private async loadDataItem(what: string) {
