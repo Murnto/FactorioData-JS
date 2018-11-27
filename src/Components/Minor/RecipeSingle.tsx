@@ -56,9 +56,10 @@ export class RecipeSingle extends React.Component<{
     }
 
     private addRecipeToGraph = () => {
-        fetch('http://127.0.0.1:8500/add_recipe', {
+        fetch('http://192.168.100.254:8500/add_recipe', {
             body: this.props.recipe.name,
             method: 'POST',
+            mode: 'no-cors',
         }).then((r) => {
             console.log(r.ok, r.status, r)
         })
