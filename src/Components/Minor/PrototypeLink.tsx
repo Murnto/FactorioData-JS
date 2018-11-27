@@ -10,6 +10,7 @@ type PrototypeLinkProps = Either<PrototypeHasIcon> & {
     data: PackLoadedData
     hideIcon?: boolean
     hideName?: boolean
+    to?: string
 }
 
 const linkStyle: CSSProperties = {
@@ -61,7 +62,7 @@ export class PrototypeLink extends React.Component<PrototypeLinkProps, {
         }
 
         return <span>
-            <Link to={`/pack/${this.props.data.packId}/i/${item.type}/${item.name}`}>
+            <Link to={this.props.to || data.link.toItem(item)}>
                 {!hideIcon && <PrototypeIcon item={item}/>}
                 {!hideName && <span style={linkStyle}>{item.title}</span>}
             </Link>

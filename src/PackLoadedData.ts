@@ -22,6 +22,17 @@ export class PackLoadedData {
     public packId: string;
     public recipes: { [name: string]: Recipe };
     public technologies: { [name: string]: Technology };
+    public link = {
+        toItem: (itemOrType: PrototypeHasIcon | string, name?: string) => {
+            if (typeof itemOrType !== 'string') {
+                return `/pack/${this.packId}/i/${itemOrType.type}/${itemOrType.name}`
+            } else {
+                return `/pack/${this.packId}/i/${itemOrType}/${name}`
+            }
+        },
+        toTech: (tech: Technology | string) =>
+            `/pack/${this.packId}/tech/${typeof tech !== 'string' ? tech.name : tech}`,
+    };
     private itemIsUsedOrProducedByRecipe: { [type: string]: { [name: string]: boolean } } = {};
     private recipesProducingCache: { [type: string]: { [name: string]: Recipe[] } } = {};
     private recipesUsedInCache: { [type: string]: { [name: string]: Recipe[] } } = {};

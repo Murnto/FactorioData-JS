@@ -49,7 +49,9 @@ export class RecipeSingle extends React.Component<{
                 <td><GroupedItemAmounts data={data} items={recipe.results}/></td>
                 <td>{recipe.energy_required}</td>
                 <td>
-                    {techUnlockedBy.map((object, i) => <PrototypeLink key={object.name} data={data} item={object}/>)}
+                    {techUnlockedBy!.map(object =>
+                        <PrototypeLink key={object.name} to={data.link.toTech(object)} data={data} item={object}/>
+                    )}
                 </td>
             </tr>
         )
