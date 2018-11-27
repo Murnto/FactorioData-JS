@@ -7,6 +7,7 @@ import {PackTechList} from "./PackTechList";
 import {PackItemInfo} from "./PackItemInfo";
 import {PackComponentTest} from "./PackComponentTest";
 import {CraftingCategoryInfo} from "./CraftingCategoryInfo";
+import {TechInfo} from "./TechInfo";
 
 export function PackInfo(props: RouteComponentProps) {
     const {match} = props as any;
@@ -65,6 +66,7 @@ export default class PackConfig extends React.Component
 
     public render() {
         const {match} = this.props as any;
+        const {data} = this.state;
         console.log("[PackConfig] Render with", match, this.state);
 
         if (!this.state.data.isLoaded) {
@@ -79,12 +81,9 @@ export default class PackConfig extends React.Component
                 <PropsRoute path={`${match.path}/info`} component={PackInfo}/>
                 <PropsRoute path={`${match.path}/test`} component={PackComponentTest} data={this.state.data}/>
                 <PropsRoute exact path={`${match.path}/tech`} component={PackTechList}  data={this.state.data}/>
-                {/*<PropsRoute exact path={`${match.path}/tech/:techName`} render={(props) => {*/}
-                    {/*return <span>Nah</span>*/}
-                    {/*// return <PackItemInfo {...props} data={this.state.data}/>*/}
-                {/*}}/>*/}
                 <PropsRoute path={`${match.path}/craftingCat/:category`} component={CraftingCategoryInfo} data={this.state.data}/>
                 <PropsRoute path={`${match.path}/i/:itemType/:itemName`} component={PackItemInfo} data={this.state.data}/>
+                <PropsRoute path={`${match.path}/tech/:techName`} component={TechInfo}  data={data}/>
             </Switch>
         )
     }

@@ -1,6 +1,6 @@
 import {Ingredient, Recipe} from "./types/factorio.recipe";
 import {Item} from "./types/factorio.item";
-import {Prototype} from "./types/factorio.prototype";
+import {Prototype, PrototypeHasIcon} from "./types/factorio.prototype";
 import {Technology} from "./types/factorio.technology";
 import {AssemblingMachine} from "./types/factorio.assemblignmachine";
 import {Furnace} from "./types/factorio.furnace";
@@ -22,6 +22,7 @@ export class PackLoadedData {
     public packId: string;
     public recipes: { [name: string]: Recipe };
     public technologies: { [name: string]: Technology };
+    public technologiesAllowed: { [name: string]: Technology[] } = {};
     public link = {
         toItem: (itemOrType: PrototypeHasIcon | string, name?: string) => {
             if (typeof itemOrType !== 'string') {
@@ -168,6 +169,22 @@ export class PackLoadedData {
             this.recipesProducingCache[type] = {};
             this.recipesUsedInCache[type] = {};
         }
+
+        console.time('preprocessTech');
+        for (const tech of Object.values(this.technologies)) {
+            for (const pre of tech.prerequisites) {
+                const preTech = this.technologies[pre];
+
+                if (preTech !== undefined) {
+                    if (this.technologiesAllowed[pre] === undefined) {
+                        this.technologiesAllowed[pre] = [];
+                    }
+
+                    this.technologiesAllowed[pre].push(tech);
+                }
+            }
+        }
+        console.timeEnd('preprocessTech');
 
         for (const recipe of Object.values(this.recipes)) {
             for (const ingd of recipe.ingredients) {
