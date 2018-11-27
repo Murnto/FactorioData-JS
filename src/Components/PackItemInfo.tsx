@@ -3,6 +3,10 @@ import {Item} from "../types/factorio.item";
 import {PrototypeIcon} from "./Minor/PrototypeIcon";
 import {RecipeList} from "./Minor/RecipeList";
 import {PackLoadedData} from "../PackLoadedData";
+import FormGroup from "reactstrap/lib/FormGroup";
+import Input from "reactstrap/lib/Input";
+import Form from "reactstrap/lib/Form";
+import Button from "reactstrap/lib/Button";
 import {Recipe} from "../types/factorio.recipe";
 
 interface PackItemInfoState {
@@ -63,6 +67,13 @@ export class PackItemInfo extends React.Component <{ match: any, data: PackLoade
                 {item !== null &&
                 <div>
                     <h2><PrototypeIcon item={item}/> {item.title}</h2>
+                    <Form inline>
+                        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                            <Input type="number" name="number" value={amount} onChange={this.onInput} placeholder="1"/>
+                        </FormGroup>
+
+                        <Button onClick={this.addItemToGraph}>Add</Button>
+                    </Form>
                 </div>
                 ||
                 <h2>{itemType}:{itemName}</h2>
@@ -96,4 +107,28 @@ export class PackItemInfo extends React.Component <{ match: any, data: PackLoade
         });
         console.timeEnd(`findRecipes:${itemType}:${itemName}`);
     }
+
+    private onInput = (e: React.FormEvent<HTMLInputElement>) => {
+        this.setState({
+            amount: e.currentTarget.value,
+        });
+    };
+
+    private addItemToGraph = () => {
+        const {match, data} = this.props;
+        const {itemType, itemName} = match.params;
+        const itemObj: Item | null = data.findItem(itemType, itemName);
+
+        if (itemObj === null) {
+            return
+        }
+
+        fetch('http://127.0.0.1:8500/add_item', {
+            body: `${itemObj.type}/${itemObj.name}/${this.state.amount}`,
+            method: 'POST',
+            mode: 'no-cors',
+        }).then((r) => {
+            console.log(r.ok, r.status, r)
+        })
+    };
 }
