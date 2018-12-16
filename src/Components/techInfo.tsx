@@ -1,11 +1,11 @@
 import * as React from "react";
-import { PrototypeIcon } from "./Minor/PrototypeIcon";
-import { RecipeList } from "./Minor/RecipeList";
-import { PackLoadedData } from "../PackLoadedData";
+import { PrototypeIcon } from "./Minor/prototypeIcon";
+import { RecipeList } from "./Minor/recipeList";
+import { PackLoadedData } from "../packLoadedData";
 import { Effect, Technology } from "../types/factorio.technology";
 import { Recipe } from "../types/factorio.recipe";
 import Container from "reactstrap/lib/Container";
-import { PrototypeLink } from "./Minor/PrototypeLink";
+import { PrototypeLink } from "./Minor/prototypeLink";
 
 interface TechInfoState {
   otherEffects: Effect[];

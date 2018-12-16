@@ -1,9 +1,9 @@
 import * as React from "react";
-import { PackLoadedData } from "../PackLoadedData";
+import { PackLoadedData } from "../packLoadedData";
 import { AssemblingMachine } from "../types/factorio.assemblignmachine";
 import { Furnace } from "../types/factorio.furnace";
 import { RouteComponentProps } from "react-router";
-import { PrototypeLink } from "./Minor/PrototypeLink";
+import { PrototypeLink } from "./Minor/prototypeLink";
 import { PrototypeHasIcon } from "../types/factorio.prototype";
 import { Container } from "reactstrap";
 

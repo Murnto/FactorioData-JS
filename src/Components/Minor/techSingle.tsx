@@ -1,6 +1,6 @@
 import * as React from "react";
-import { PackLoadedData } from "../../PackLoadedData";
-import { PrototypeLink } from "./PrototypeLink";
+import { PackLoadedData } from "../../packLoadedData";
+import { PrototypeLink } from "./prototypeLink";
 import { Technology } from "../../types/factorio.technology";
 import { Link } from "react-router-dom";
 

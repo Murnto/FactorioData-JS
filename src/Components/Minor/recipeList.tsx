@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Recipe } from "../../types/factorio.recipe";
-import { RecipeSingle } from "./RecipeSingle";
-import { PackLoadedData } from "../../PackLoadedData";
+import { RecipeSingle } from "./recipeSingle";
+import { PackLoadedData } from "../../packLoadedData";
 
 export class RecipeList extends React.Component<{
   data: PackLoadedData;

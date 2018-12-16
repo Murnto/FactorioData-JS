@@ -1,13 +1,13 @@
 import * as React from "react";
-import { PackLoadedData } from "../PackLoadedData";
+import { PackLoadedData } from "../packLoadedData";
 import { Container } from "reactstrap";
 import Button from "reactstrap/lib/Button";
 import Popover from "reactstrap/lib/Popover";
 import PopoverHeader from "reactstrap/lib/PopoverHeader";
 import PopoverBody from "reactstrap/lib/PopoverBody";
-import { PrototypeIcon } from "./Minor/PrototypeIcon";
-import { PrototypeLink } from "./Minor/PrototypeLink";
-import { PopoverItemRecipe } from "./Minor/PopoverItemRecipe";
+import { PrototypeIcon } from "./Minor/prototypeIcon";
+import { PrototypeLink } from "./Minor/prototypeLink";
+import { PopoverItemRecipe } from "./Minor/popoverItemRecipe";
 
 export class PackComponentTest extends React.Component<{
   data: PackLoadedData;

@@ -4,11 +4,11 @@ import {
   PassedItem,
   PassedNameTypeData,
   resolveEitherToPrototype
-} from "../../Util";
+} from "../../util";
 import { PrototypeHasIcon } from "../../types/factorio.prototype";
 import { Link } from "react-router-dom";
-import { PackLoadedData } from "../../PackLoadedData";
-import { PrototypeIcon } from "./PrototypeIcon";
+import { PackLoadedData } from "../../packLoadedData";
+import { PrototypeIcon } from "./prototypeIcon";
 import { CSSProperties } from "react";
 
 type PrototypeLinkProps = Either<PrototypeHasIcon> & {

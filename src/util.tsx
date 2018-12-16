@@ -1,4 +1,4 @@
-import { PackLoadedData } from "./PackLoadedData";
+import { PackLoadedData } from "./packLoadedData";
 import { PrototypeHasIcon } from "./types/factorio.prototype";
 import { Route, RouteComponentProps, RouteProps } from "react-router";
 import * as React from "react";

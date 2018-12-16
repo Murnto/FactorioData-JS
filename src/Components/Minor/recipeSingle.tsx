@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Recipe } from "../../types/factorio.recipe";
-import { GroupedItemAmounts } from "./GroupedItemAmounts";
-import { PackLoadedData } from "../../PackLoadedData";
-import { PrototypeIcon } from "./PrototypeIcon";
-import { PrototypeLink } from "./PrototypeLink";
+import { GroupedItemAmounts } from "./groupedItemAmounts";
+import { PackLoadedData } from "../../packLoadedData";
+import { PrototypeIcon } from "./prototypeIcon";
+import { PrototypeLink } from "./prototypeLink";
 import { Technology } from "../../types/factorio.technology";
 import { Link } from "react-router-dom";
 

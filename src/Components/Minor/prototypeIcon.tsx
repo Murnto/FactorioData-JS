@@ -5,7 +5,7 @@ import {
   PassedItem,
   PassedNameTypeData,
   resolveEitherToPrototype
-} from "../../Util";
+} from "../../util";
 import { PrototypeHasIcon } from "../../types/factorio.prototype";
 
 const iconStyle: CSSProperties = {

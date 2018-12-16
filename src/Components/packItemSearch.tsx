@@ -1,6 +1,6 @@
 import * as React from "react";
-import { PackLoadedData } from "../PackLoadedData";
-import { PrototypeLink } from "./Minor/PrototypeLink";
+import { PackLoadedData } from "../packLoadedData";
+import { PrototypeLink } from "./Minor/prototypeLink";
 import { Container, FormGroup, Input } from "reactstrap";
 import { Item } from "../types/factorio.item";
 

@@ -3,8 +3,8 @@ import { Prototype } from "../../types/factorio.prototype";
 import Popover from "reactstrap/lib/Popover";
 import PopoverHeader from "reactstrap/lib/PopoverHeader";
 import PopoverBody from "reactstrap/lib/PopoverBody";
-import { PackLoadedData } from "../../PackLoadedData";
-import { GroupedItemAmounts } from "./GroupedItemAmounts";
+import { PackLoadedData } from "../../packLoadedData";
+import { GroupedItemAmounts } from "./groupedItemAmounts";
 
 let counter = 0;
 

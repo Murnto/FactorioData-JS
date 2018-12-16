@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Item } from "../types/factorio.item";
-import { PrototypeIcon } from "./Minor/PrototypeIcon";
-import { RecipeList } from "./Minor/RecipeList";
-import { PackLoadedData } from "../PackLoadedData";
+import { PrototypeIcon } from "./Minor/prototypeIcon";
+import { RecipeList } from "./Minor/recipeList";
+import { PackLoadedData } from "../packLoadedData";
 import FormGroup from "reactstrap/lib/FormGroup";
 import Input from "reactstrap/lib/Input";
 import Form from "reactstrap/lib/Form";

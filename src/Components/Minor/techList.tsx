@@ -1,7 +1,7 @@
 import * as React from "react";
-import { PackLoadedData } from "../../PackLoadedData";
+import { PackLoadedData } from "../../packLoadedData";
 import { Technology } from "../../types/factorio.technology";
-import { TechSingle } from "./TechSingle";
+import { TechSingle } from "./techSingle";
 
 export class TechList extends React.Component<{
   data: PackLoadedData;

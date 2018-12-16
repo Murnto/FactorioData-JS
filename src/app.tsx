@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Component } from "react";
 import { Link, Route, RouteComponentProps, Switch } from "react-router-dom";
-import PackConfig from "./Components/PackConfig";
-import { PropsRoute } from "./Util";
+import PackConfig from "./Components/packConfig";
+import { PropsRoute } from "./util";
 import {
   Collapse,
   DropdownItem,

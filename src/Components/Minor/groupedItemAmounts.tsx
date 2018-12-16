@@ -1,9 +1,9 @@
 import * as React from "react";
 import { CSSProperties } from "react";
 import { Ingredient } from "../../types/factorio.recipe";
-import { PackLoadedData } from "../../PackLoadedData";
-import { PrototypeLink } from "./PrototypeLink";
-import { PopoverItemRecipe } from "./PopoverItemRecipe";
+import { PackLoadedData } from "../../packLoadedData";
+import { PrototypeLink } from "./prototypeLink";
+import { PopoverItemRecipe } from "./popoverItemRecipe";
 
 const groupStyle: CSSProperties = {
   display: "inline-block",

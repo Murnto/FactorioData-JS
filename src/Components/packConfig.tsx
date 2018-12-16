@@ -1,13 +1,13 @@
 import * as React from "react";
 import { RouteComponentProps, Switch } from "react-router-dom";
-import { PackLoadedData } from "../PackLoadedData";
-import { PackItemSearch } from "./PackItemSearch";
-import { PropsRoute } from "../Util";
-import { PackTechList } from "./PackTechList";
-import { PackItemInfo } from "./PackItemInfo";
-import { PackComponentTest } from "./PackComponentTest";
-import { CraftingCategoryInfo } from "./CraftingCategoryInfo";
-import { TechInfo } from "./TechInfo";
+import { PackLoadedData } from "../packLoadedData";
+import { PackItemSearch } from "./packItemSearch";
+import { PropsRoute } from "../util";
+import { PackTechList } from "./packTechList";
+import { PackItemInfo } from "./packItemInfo";
+import { PackComponentTest } from "./packComponentTest";
+import { CraftingCategoryInfo } from "./craftingCategoryInfo";
+import { TechInfo } from "./techInfo";
 
 export function PackInfo(props: RouteComponentProps) {
   const { match } = props as any;
