@@ -85,18 +85,13 @@ export default class PackConfig extends React.Component
         });
 
         const packId = this.props.match.params.packId;
-        const promises: Array<Promise<void>> = [];
 
-        promises.push(this.loadDataItem("recipes"));
-        promises.push(this.loadDataItem("items"));
-        promises.push(this.loadDataItem("technologies"));
-        promises.push(this.loadDataItem("furnaces"));
-        promises.push(this.loadDataItem("assemblingMachines"));
-        promises.push(this.loadDataItem("miningDrills"));
+        const url = `/pack/${packId}.json`;
+        const loadedData = await fetch(url);
+
+        this.state.data.loadedThings = await loadedData.json();
 
         this.props.onPackChange(packId);
-
-        await Promise.all(promises);
 
         data.packId = packId;
         data.isLoaded = true;
@@ -105,19 +100,6 @@ export default class PackConfig extends React.Component
         this.setState({
             isLoaded: true,
         })
-    }
-
-    private async loadDataItem(what: string) {
-        const self = this;
-        try {
-            const url = `/pack/${self.props.match.params.packId}/${what}.json`;
-            const data = await fetch(url);
-
-            this.state.data[what] = await data.json();
-            this.state.data.onFinishLoading(what);
-        } catch (e) {
-            console.error(what, e);
-        }
     }
 };
 

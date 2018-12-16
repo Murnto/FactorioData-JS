@@ -5,6 +5,22 @@ import {Technology} from "./types/factorio.technology";
 import {AssemblingMachine} from "./types/factorio.assemblignmachine";
 import {Furnace} from "./types/factorio.furnace";
 
+const itemTypes = [
+    "fluid",
+    "item",
+    "gun",
+    "blueprint",
+    "deconstruction-item",
+    "ammo",
+    "capsule",
+    "rail-planner",
+    "module",
+    "armor",
+    "tool",
+    "mining-tool",
+    "repair-tool",
+];
+
 interface KnownThings {
     // 'mining-drill': {[name: string]: MiningDrill}
     'assembling-machine': { [name: string]: AssemblingMachine }
@@ -23,6 +39,7 @@ export class PackLoadedData {
     public recipes: { [name: string]: Recipe };
     public technologies: { [name: string]: Technology };
     public technologiesAllowed: { [name: string]: Technology[] } = {};
+    public technologyRequiredFor: { [recipeName: string]: Technology[] } = {};
     public link = {
         toItem: (itemOrType: PrototypeHasIcon | string, name?: string) => {
             if (typeof itemOrType !== 'string') {
@@ -87,12 +104,7 @@ export class PackLoadedData {
     }
 
     public technologyUnlockedBy(recipe: Recipe): Technology[] {
-        return Object.values(this.technologies)
-            .filter(r =>
-                r.effects.some(effect =>
-                    effect.type === "unlock-recipe" && effect.recipe === recipe.name
-                )
-            )
+        return this.technologyRequiredFor[recipe.name] || [];
     }
 
     public findItem(itemOrType: Ingredient | string, name?: string): Item | null {
@@ -142,29 +154,18 @@ export class PackLoadedData {
         return result;
     }
 
-    public onFinishLoading(what: string) {
-        console.time('onFinishLoading:' + what);
-        const things: { [name: string]: Prototype } = this[what];
-        let doubleNested: boolean = false;
-
-        if (what === "items") {
-            doubleNested = true;
-        }
-
-        if (doubleNested) {
-            Object.keys(things).forEach(name => {
-                this.addThings(things[name] as any);
-            });
-        } else {
-            this.addThings(things);
-        }
-        console.timeEnd('onFinishLoading:' + what);
-    }
-
     public onFinishLoadingAll() {
         console.time('onFinishLoadingAll');
 
-        for (const type of Object.keys(this.items)) {
+        (window as any).pd = this;
+
+        this.technologies = this.loadedThings.technology;
+        this.recipes = this.loadedThings.recipe;
+        this.items = {};
+
+        for (const type of itemTypes) {
+            this.items[type] = this.loadedThings[type] as any;
+
             this.itemIsUsedOrProducedByRecipe[type] = {};
             this.recipesProducingCache[type] = {};
             this.recipesUsedInCache[type] = {};
@@ -172,15 +173,35 @@ export class PackLoadedData {
 
         console.time('preprocessTech');
         for (const tech of Object.values(this.technologies)) {
-            for (const pre of tech.prerequisites) {
-                const preTech = this.technologies[pre];
+            if (tech.prerequisites === undefined) {
+                continue;
+            }
 
-                if (preTech !== undefined) {
-                    if (this.technologiesAllowed[pre] === undefined) {
-                        this.technologiesAllowed[pre] = [];
+            if (tech.prerequisites) {
+                for (const pre of tech.prerequisites) {
+                    const preTech = this.technologies[pre];
+
+                    if (preTech !== undefined) {
+                        if (this.technologiesAllowed[pre] === undefined) {
+                            this.technologiesAllowed[pre] = [];
+                        }
+
+                        this.technologiesAllowed[pre].push(tech);
                     }
+                }
+            }
 
-                    this.technologiesAllowed[pre].push(tech);
+            if (tech.effects) {
+                for  (const effect of tech.effects){
+                    if (effect.type === 'unlock-recipe') {
+                        const rName = effect.recipe!;
+
+                        if (this.technologyRequiredFor[rName] === undefined) {
+                            this.technologyRequiredFor[rName] = [];
+                        }
+
+                        this.technologyRequiredFor[rName].push(tech);
+                    }
                 }
             }
         }
@@ -204,21 +225,5 @@ export class PackLoadedData {
         }
 
         console.timeEnd('onFinishLoadingAll');
-    }
-
-    private addThings(things: { [name: string]: Prototype }) {
-        if (Object.keys(things).length === 0) {
-            return;
-        }
-
-        const type = Object.values(things)[0].type;
-
-        if (this.loadedThings[type] === undefined) {
-            this.loadedThings[type] = {};
-        }
-
-        Object.values(things).forEach(thing => {
-            this.loadedThings[type][thing.name] = thing;
-        });
     }
 }

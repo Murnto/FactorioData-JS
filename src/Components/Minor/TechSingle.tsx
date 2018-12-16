@@ -18,7 +18,7 @@ export class TechSingle extends React.Component<{
                 </Link></td>
                 <td>
                     <div className="tech-units">
-                        {tech.unit.ingredients.map(ingd =>
+                        {Array.isArray(tech.unit.ingredients) && tech.unit.ingredients.map(ingd =>
                             <div key={ingd.name} className="tech-ingd" style={{
                                 display: 'inline-block',
                             }}>

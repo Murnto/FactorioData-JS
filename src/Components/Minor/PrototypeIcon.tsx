@@ -74,11 +74,11 @@ export class PrototypeIcon extends React.Component<PrototypeIconProps, {
             if (item.icons !== null && item.icons !== undefined) {
                 return <span style={wrapperStyle}>
                     {item.icons.map((i, idx) =>
-                        <img key={idx} style={iconStyle} className="factorio-icon" src={i.icon}/>
+                        <img key={idx} style={iconStyle} className="factorio-icon" src={"/icon/" + i.icon}/>
                     )}
                 </span>
             } else {
-                return <span style={wrapperStyle}><img style={iconStyle} className="factorio-icon" src={item !== null ? item.icon : ""}/></span>
+                return <span style={wrapperStyle}><img style={iconStyle} className="factorio-icon" src={item !== null ? "/icon/" + item.icon : ""}/></span>
             }
         }
     }
