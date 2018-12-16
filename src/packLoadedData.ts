@@ -18,7 +18,11 @@ const itemTypes = [
   "armor",
   "tool",
   "mining-tool",
-  "repair-tool"
+  "repair-tool",
+  "item-with-entity-data",
+  "item-with-label",
+  "item-with-tags",
+  "item-with-inventory"
 ];
 
 interface KnownThings {
