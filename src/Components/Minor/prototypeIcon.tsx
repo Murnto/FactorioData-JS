@@ -86,38 +86,38 @@ export class PrototypeIcon extends React.Component<
             <span style={iconStyle} />
           </span>
         );
-      } else {
-        return (
-          <span style={wrapperStyle}>
-            <span style={itemBrokenImage} className="item-broken-image" />
-          </span>
-        );
       }
-    } else {
-      if (item.icons !== null && item.icons !== undefined) {
-        return (
-          <span style={wrapperStyle}>
-            {item.icons.map((i, idx) => (
-              <img
-                key={idx}
-                style={iconStyle}
-                className="factorio-icon"
-                src={"/icon/" + i.icon}
-              />
-            ))}
-          </span>
-        );
-      } else {
-        return (
-          <span style={wrapperStyle}>
+
+      return (
+        <span style={wrapperStyle}>
+          <span style={itemBrokenImage} className="item-broken-image" />
+        </span>
+      );
+    }
+
+    if (item.icons !== null && item.icons !== undefined) {
+      return (
+        <span style={wrapperStyle}>
+          {item.icons.map((i, idx) => (
             <img
+              key={idx}
               style={iconStyle}
               className="factorio-icon"
-              src={item !== null ? "/icon/" + item.icon : ""}
+              src={"/icon/" + i.icon}
             />
-          </span>
-        );
-      }
+          ))}
+        </span>
+      );
     }
+
+    return (
+      <span style={wrapperStyle}>
+        <img
+          style={iconStyle}
+          className="factorio-icon"
+          src={item !== null ? "/icon/" + item.icon : ""}
+        />
+      </span>
+    );
   }
 }

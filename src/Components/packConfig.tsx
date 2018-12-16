@@ -46,10 +46,7 @@ export default class PackConfig extends React.Component<
     this.initPack();
   }
 
-  public componentDidUpdate(
-    prevProps: PackConfigProps,
-    prevState: PackConfigState
-  ) {
+  public componentDidUpdate(prevProps: PackConfigProps) {
     if (prevProps.match.params.packId !== this.props.match.params.packId) {
       this.initPack();
     }

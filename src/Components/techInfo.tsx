@@ -35,10 +35,7 @@ export class TechInfo extends React.Component<
     this.initInfo();
   }
 
-  public componentDidUpdate(
-    prevProps: { data: PackLoadedData; match: any },
-    prevState: TechInfoState
-  ) {
+  public componentDidUpdate(prevProps: { data: PackLoadedData; match: any }) {
     if (
       prevProps.match.params.techName !== this.props.match.params.techName ||
       prevProps.data.packId !== this.props.data.packId
@@ -127,8 +124,7 @@ export class TechInfo extends React.Component<
 
   public shouldComponentUpdate(
     nextProps: Readonly<{ data: PackLoadedData; match: any }>,
-    nextState: Readonly<TechInfoState>,
-    nextContext: any
+    nextState: Readonly<TechInfoState>
   ): boolean {
     console.log("shouldComponentUpdate(", nextProps, nextState, ")");
     return (
@@ -175,8 +171,8 @@ export class TechInfo extends React.Component<
       otherEffects,
       recipeUnlockedBy,
       tech,
-      techAllows: data.technologiesAllowed[tech.name] || [],
-      techRequired
+      techRequired,
+      techAllows: data.technologiesAllowed[tech.name] || []
     });
     console.timeEnd(`loadTechInfo:${techName}`);
   }

@@ -38,9 +38,9 @@ export class PackLoadedData {
     toItem: (itemOrType: PrototypeHasIcon | string, name?: string) => {
       if (typeof itemOrType !== "string") {
         return `/pack/${this.packId}/i/${itemOrType.type}/${itemOrType.name}`;
-      } else {
-        return `/pack/${this.packId}/i/${itemOrType}/${name}`;
       }
+
+      return `/pack/${this.packId}/i/${itemOrType}/${name}`;
     },
     toTech: (tech: Technology | string) =>
       `/pack/${this.packId}/tech/${typeof tech !== "string" ? tech.name : tech}`

@@ -35,10 +35,7 @@ export class PackItemInfo extends React.Component<
     this.initInfo();
   }
 
-  public componentDidUpdate(
-    prevProps: { data: PackLoadedData; match: any },
-    prevState: PackItemInfoState
-  ) {
+  public componentDidUpdate(prevProps: { data: PackLoadedData; match: any }) {
     if (
       prevProps.match.params.itemType !== this.props.match.params.itemType ||
       prevProps.match.params.itemName !== this.props.match.params.itemName ||
@@ -104,8 +101,7 @@ export class PackItemInfo extends React.Component<
 
   public shouldComponentUpdate(
     nextProps: Readonly<{ data: PackLoadedData; match: any }>,
-    nextState: Readonly<PackItemInfoState>,
-    nextContext: any
+    nextState: Readonly<PackItemInfoState>
   ): boolean {
     console.log("shouldComponentUpdate(", nextProps, nextState, ")");
     return (

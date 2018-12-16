@@ -32,12 +32,12 @@ export function resolveEitherToPrototype(
       either.type,
       either.name
     ) as PrototypeHasIcon;
-  } else {
-    return either.item;
   }
+
+  return either.item;
 }
 
-function renderMergedProps<P extends RouteComponentProps, S>(
+function renderMergedProps<P extends RouteComponentProps>(
   component: React.ComponentType<P> | React.ComponentType<any> & P,
   ...rest: any[]
 ) {
@@ -45,7 +45,7 @@ function renderMergedProps<P extends RouteComponentProps, S>(
   return React.createElement(component, finalProps);
 }
 
-export function PropsRoute<P extends RouteComponentProps, S>({
+export function PropsRoute<P extends RouteComponentProps>({
   component,
   ...rest
 }:
@@ -53,11 +53,8 @@ export function PropsRoute<P extends RouteComponentProps, S>({
   | RouteProps
   | P
   | any) {
-  // tslint:disable-next-line
-  return (
-    <Route
-      {...rest}
-      render={routeProps => renderMergedProps(component!, routeProps, rest)}
-    />
-  );
+  const renderFunc = (routeProps: any) =>
+    renderMergedProps(component!, routeProps, rest);
+
+  return <Route {...rest} render={renderFunc} />;
 }

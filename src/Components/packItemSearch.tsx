@@ -69,8 +69,8 @@ export class PackItemSearch extends React.Component<
     // console.log('[PackItemSearch] Search update:', e.currentTarget.value, searchResults.length);
 
     this.setState({
-      search: e.currentTarget.value,
-      searchResults
+      searchResults,
+      search: e.currentTarget.value
     });
   };
 }

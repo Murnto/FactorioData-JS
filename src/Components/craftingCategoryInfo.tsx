@@ -98,8 +98,7 @@ export class CraftingCategoryInfo extends React.Component<
 
   public shouldComponentUpdate(
     nextProps: Readonly<{ data: PackLoadedData; match: any }>,
-    nextState: Readonly<CraftingCategoryInfoState>,
-    nextContext: any
+    nextState: Readonly<CraftingCategoryInfoState>
   ): boolean {
     return (
       this.props.match.params.category !== nextProps.match.params.category ||
