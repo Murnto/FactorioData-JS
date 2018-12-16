@@ -24,6 +24,7 @@ const itemTypes = [
   "item-with-tags",
   "item-with-inventory"
 ];
+const notItems = ["ammo-category", "recipe", "technology"];
 
 interface KnownThings {
   // 'mining-drill': {[name: string]: MiningDrill}
@@ -83,6 +84,26 @@ export class PackLoadedData {
     }
 
     return res;
+  }
+
+  public findEntity(item: Item | null): PrototypeHasIcon | null {
+    if (item === null || !item.place_result) {
+      return null;
+    }
+
+    for (const type of Object.keys(this.loadedThings)) {
+      if (itemTypes.indexOf(type) !== -1 || notItems.indexOf(type) !== -1) {
+        continue;
+      }
+
+      for (const obj of Object.values(this.loadedThings[type])) {
+        if (obj.name === item.place_result) {
+          return obj;
+        }
+      }
+    }
+
+    return null;
   }
 
   public findItem(itemOrType: Ingredient | string, name?: string): Item | null {

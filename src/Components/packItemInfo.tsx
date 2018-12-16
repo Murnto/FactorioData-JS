@@ -8,9 +8,12 @@ import Input from "reactstrap/lib/Input";
 import Form from "reactstrap/lib/Form";
 import Button from "reactstrap/lib/Button";
 import { Recipe } from "../types/factorio.recipe";
+import { PrototypeHasIcon } from "../types/factorio.prototype";
+import { EntityInfoBox } from "./InfoBox/entityInfoBox";
 
 interface PackItemInfoState {
   amount: string;
+  entity: PrototypeHasIcon | null;
   item: Item | null;
   recipesProducing: Recipe[] | null;
   recipesUsedIn: Recipe[] | null;
@@ -25,6 +28,7 @@ export class PackItemInfo extends React.Component<
 
     this.state = {
       amount: "0",
+      entity: null,
       item: null,
       recipesProducing: null,
       recipesUsedIn: null
@@ -48,7 +52,13 @@ export class PackItemInfo extends React.Component<
   public render() {
     const { match, data } = this.props;
     const { itemType, itemName, packId } = match.params;
-    const { amount, item, recipesProducing, recipesUsedIn } = this.state;
+    const {
+      amount,
+      entity,
+      item,
+      recipesProducing,
+      recipesUsedIn
+    } = this.state;
 
     console.log("[PackItemInfo] Render with", packId, itemType, itemName, item);
 
@@ -58,6 +68,8 @@ export class PackItemInfo extends React.Component<
 
     return (
       <div>
+        {entity && <EntityInfoBox data={data} entity={entity} />}
+
         {(item !== null && (
           <div>
             <h2>
@@ -137,13 +149,19 @@ export class PackItemInfo extends React.Component<
     const { match, data } = this.props;
     const { itemType, itemName } = match.params;
 
-    console.time(`findRecipes:${itemType}:${itemName}`);
+    console.time(`initInfo:${itemType}:${itemName}`);
+
+    const item = data.findItem(itemType, itemName);
+    const entity = data.findEntity(item);
+
     this.setState({
-      item: data.findItem(itemType, itemName),
+      entity,
+      item,
       recipesProducing: data.recipesProducing(itemType, itemName),
       recipesUsedIn: data.recipesUsedIn(itemType, itemName)
     });
-    console.timeEnd(`findRecipes:${itemType}:${itemName}`);
+
+    console.timeEnd(`initInfo:${itemType}:${itemName}`);
   }
 
   private onInput = (e: React.FormEvent<HTMLInputElement>) => {
