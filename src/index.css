@@ -11,3 +11,13 @@ html, body, #root, #root > main > div {
 #root > main {
     height: calc(100% - 56px) !important;
 }
+
+span.fake-link {
+    cursor: pointer;
+    color: #007bff;
+}
+
+span.fake-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}

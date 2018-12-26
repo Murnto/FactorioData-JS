@@ -13,6 +13,7 @@ export class RecipeSingle extends React.Component<
     noCategoryLinks?: boolean;
     noTechUnlocks?: boolean;
     recipe: Recipe;
+    recipeNameCallback?: (name: string) => void;
   },
   {
     techUnlockedBy: Technology[] | null;
@@ -65,9 +66,9 @@ export class RecipeSingle extends React.Component<
             recipe.category}
         </td>
         <td>
-          <a href="javascript:void(0)" onClick={this.addRecipeToGraph}>
+          <span className="fake-link" onClick={this.addRecipeToGraph}>
             {recipe.title}
-          </a>
+          </span>
         </td>
         <td>
           <GroupedItemAmounts data={data} items={recipe.ingredients} />
@@ -93,12 +94,16 @@ export class RecipeSingle extends React.Component<
   }
 
   private addRecipeToGraph = () => {
-    fetch("http://192.168.100.254:8500/add_recipe", {
-      body: this.props.recipe.name,
-      method: "POST",
-      mode: "no-cors"
-    }).then(r => {
-      console.log(r.ok, r.status, r);
-    });
+    if (this.props.recipeNameCallback) {
+      this.props.recipeNameCallback(this.props.recipe.name);
+    } else {
+      fetch("http://192.168.100.254:8500/add_recipe", {
+        body: this.props.recipe.name,
+        method: "POST",
+        mode: "no-cors"
+      }).then(r => {
+        console.log(r.ok, r.status, r);
+      });
+    }
   };
 }
