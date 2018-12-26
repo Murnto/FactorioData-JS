@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 export class RecipeSingle extends React.Component<
   {
     data: PackLoadedData;
+    noCategoryLinks?: boolean;
     noTechUnlocks?: boolean;
     recipe: Recipe;
   },
@@ -39,7 +40,7 @@ export class RecipeSingle extends React.Component<
   // }
 
   public render() {
-    const { recipe, data, noTechUnlocks } = this.props;
+    const { recipe, data, noTechUnlocks, noCategoryLinks } = this.props;
     const { techUnlockedBy } = this.state;
 
     if (!noTechUnlocks && techUnlockedBy === null) {
@@ -52,13 +53,16 @@ export class RecipeSingle extends React.Component<
           <PrototypeIcon item={recipe} missingOk={true} />
         </td>
         <td>
-          <Link
-            to={`/pack/${this.props.data.packId}/craftingCat/${
-              recipe.category
-            }`}
-          >
-            {recipe.category}
-          </Link>
+          {(!noCategoryLinks && (
+            <Link
+              to={`/pack/${this.props.data.packId}/craftingCat/${
+                recipe.category
+              }`}
+            >
+              {recipe.category}
+            </Link>
+          )) ||
+            recipe.category}
         </td>
         <td>
           <a href="javascript:void(0)" onClick={this.addRecipeToGraph}>
