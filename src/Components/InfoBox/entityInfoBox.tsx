@@ -1,6 +1,6 @@
 import * as React from "react";
-import {PackLoadedData} from "../../packLoadedData";
-import {PrototypeHasIcon} from "../../types/factorio.prototype";
+import { PackLoadedData } from "../../packLoadedData";
+import { PrototypeHasIcon } from "../../types/factorio.prototype";
 import ReactJson from "react-json-view";
 
 const entries: any[][] = [
