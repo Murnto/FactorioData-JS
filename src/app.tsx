@@ -57,21 +57,19 @@ class App extends Component<
 
   public render() {
     return (
-      <div>
+      <React.Fragment>
         {this.renderHeader()}
-        <main>
-          <div id="mainContent" className="container-fluid">
-            <Switch>
-              <Route strict exact path="/pack" component={PackSelector} />
-              <PropsRoute
-                path="/pack/:packId"
-                component={PackConfig}
-                onPackChange={this.onPackChange}
-              />
-            </Switch>
-          </div>
+        <main id="mainContent" className="container-fluid">
+          <Switch>
+            <Route strict exact path="/pack" component={PackSelector} />
+            <PropsRoute
+              path="/pack/:packId"
+              component={PackConfig}
+              onPackChange={this.onPackChange}
+            />
+          </Switch>
         </main>
-      </div>
+      </React.Fragment>
     );
   }
 
