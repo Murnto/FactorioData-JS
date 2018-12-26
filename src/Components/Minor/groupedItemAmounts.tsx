@@ -20,7 +20,6 @@ export function GroupedItemAmounts(props: {
 
   return (
     <span>
-      {items.map((ingd: Ingredient) => {
         const item = data.findItem(ingd);
         const inner = (
           <div style={groupStyle} key={ingd.type + ":" + ingd.name}>
@@ -28,6 +27,8 @@ export function GroupedItemAmounts(props: {
             <PrototypeLink data={data} item={item} hideName />
           </div>
         );
+      {items.map &&
+        items.map((ingd: Ingredient) => {
 
         if (item === null) {
           return inner;
