@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import registerServiceWorker from "./registerServiceWorker";
 import { BrowserRouter } from "react-router-dom";
+import * as Modal from "react-modal";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -13,3 +14,6 @@ ReactDOM.render(
   document.getElementById("root") as HTMLElement
 );
 registerServiceWorker();
+
+// @ts-ignore
+Modal.setAppElement(document.getElementById("root"));
