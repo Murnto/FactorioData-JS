@@ -15,6 +15,7 @@ type PrototypeLinkProps = Either<PrototypeHasIcon> & {
   data: PackLoadedData;
   hideIcon?: boolean;
   hideName?: boolean;
+  onClick?: (item: PrototypeHasIcon) => void;
   to?: string;
 };
 
@@ -63,7 +64,7 @@ export class PrototypeLink extends React.Component<
 
   public render() {
     const { item } = this.state;
-    const { hideIcon, hideName, data } = this.props;
+    const { hideIcon, hideName, data, onClick } = this.props;
 
     if (item === null || item === undefined) {
       return <span>Error</span>;
@@ -71,11 +72,24 @@ export class PrototypeLink extends React.Component<
 
     return (
       <span>
-        <Link to={this.props.to || data.link.toItem(item)}>
-          {!hideIcon && <PrototypeIcon item={item} />}
-          {!hideName && <span style={linkStyle}>{item.title}</span>}
-        </Link>
+        {(onClick && (
+          <span className="fake-link" onClick={this.itemCallback}>
+            {!hideIcon && <PrototypeIcon item={item} />}
+            {!hideName && <span style={linkStyle}>{item.title}</span>}
+          </span>
+        )) || (
+          <Link to={this.props.to || data.link.toItem(item)}>
+            {!hideIcon && <PrototypeIcon item={item} />}
+            {!hideName && <span style={linkStyle}>{item.title}</span>}
+          </Link>
+        )}
       </span>
     );
   }
+
+  private itemCallback = () => {
+    if (this.props.onClick !== undefined) {
+      this.props.onClick(this.state.item!);
+    }
+  };
 }
