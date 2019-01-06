@@ -95,24 +95,24 @@ class App extends Component<
           <Nav className="ml-auto" navbar>
             {this.renderPackLink(`/pack/${currentPack}`, "Item Search")}
             {this.renderPackLink(`/pack/${currentPack}/tech`, "Technology")}
-            {this.renderPackLink(
-              `/pack/${currentPack}/itemcats`,
-              "Item Categories"
-            )}
-            {this.renderPackLink(
-              `/pack/${currentPack}/recipecat`,
-              "Recipe Categories"
-            )}
-            {this.renderPackLink(`/pack/${currentPack}/info`, "Pack Info")}
-            {this.renderPackLink(
-              `/pack/${currentPack}/i/item/iron-plate`,
-              "Iron Plate"
-            )}
-            {this.renderPackLink(
-              `/pack/${currentPack}/factoratio`,
-              "Factoratio"
-            )}
-            {this.renderPackLink(`/pack/${currentPack}/test`, "Test")}
+            {/*{this.renderPackLink(*/}
+            {/*`/pack/${currentPack}/itemcats`,*/}
+            {/*"Item Categories"*/}
+            {/*)}*/}
+            {/*{this.renderPackLink(*/}
+            {/*`/pack/${currentPack}/recipecat`,*/}
+            {/*"Recipe Categories"*/}
+            {/*)}*/}
+            {/*{this.renderPackLink(`/pack/${currentPack}/info`, "Pack Info")}*/}
+            {/*{this.renderPackLink(*/}
+            {/*`/pack/${currentPack}/i/item/iron-plate`,*/}
+            {/*"Iron Plate"*/}
+            {/*)}*/}
+            {/*{this.renderPackLink(*/}
+            {/*`/pack/${currentPack}/factoratio`,*/}
+            {/*"Factoratio"*/}
+            {/*)}*/}
+            {/*{this.renderPackLink(`/pack/${currentPack}/test`, "Test")}*/}
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 Config Pack: {currentPack}
