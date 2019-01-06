@@ -16,6 +16,7 @@ import {
   NavLink,
   UncontrolledDropdown
 } from "reactstrap";
+import CustomPackCreation from "./Components/customPackCreation";
 
 const packs = [
   {
@@ -62,6 +63,7 @@ class App extends Component<
         <main id="mainContent" className="container-fluid">
           <Switch>
             <Route strict exact path="/pack" component={PackSelector} />
+            <Route strict exact path="/custom" component={CustomPackCreation} />
             <PropsRoute
               path="/pack/:packId"
               component={PackConfig}
