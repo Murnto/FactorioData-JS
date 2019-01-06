@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@types/cytoscape": "^3.2.8",
+    "@types/react-modal": "^3.6.0",
     "@types/react-router-dom": "^4.3.1",
     "@types/reactstrap": "^6.4.2",
     "bootstrap": "^4.1.3",
