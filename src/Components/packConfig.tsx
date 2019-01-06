@@ -8,6 +8,7 @@ import { PackItemInfo } from "./packItemInfo";
 import { PackComponentTest } from "./packComponentTest";
 import { CraftingCategoryInfo } from "./craftingCategoryInfo";
 import { TechInfo } from "./techInfo";
+import PackItemGraphCyto from "../Calculator/packItemGraphCyto";
 
 export function PackInfo(props: RouteComponentProps) {
   const { match } = props as any;
@@ -83,6 +84,12 @@ export default class PackConfig extends React.Component<
         />
         {/*<PropsRoute exact path={`${match.path}/graph`} component={PackItemGraph} data={data}/>*/}
         {/*<PropsRoute exact path={`${match.path}/graph2`} component={PackItemGraphGL} data={data}/>*/}
+        <PropsRoute
+          exact
+          path={`${match.path}/graph3`}
+          component={PackItemGraphCyto}
+          data={data}
+        />
         <PropsRoute
           path={`${match.path}/tech/:techName`}
           component={TechInfo}
