@@ -116,11 +116,20 @@ class App extends Component<
                 Config Pack: {currentPack}
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>
-                  <Link to="/pack/base-f16-normal">F16: Base</Link>
+                <DropdownItem tag={Link} to="/pack/base-f16-normal">
+                  F16: Base
                 </DropdownItem>
-                <DropdownItem>
-                  <Link to="/pack/seablock-f16-normal">F16: Seablock Pack</Link>
+                <DropdownItem tag={Link} to="/pack/seablock-f16-normal">
+                  F16: Seablock Pack
+                </DropdownItem>
+                <DropdownItem tag={Link} to="/pack/angelsbobs-f16-normal">
+                  F16: Angels + Bobs
+                </DropdownItem>
+                <DropdownItem tag={Link} to="/pack/angels-f16-normal">
+                  F16: Angels
+                </DropdownItem>
+                <DropdownItem tag={Link} to="/pack/bobsmods-f16-normal">
+                  F16: Bobsmods
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
