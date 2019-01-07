@@ -3,12 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/cytoscape": "^3.2.8",
-    "@types/jquery": "^3.3.29",
-    "@types/react-dropzone": "^4.2.2",
-    "@types/react-modal": "^3.6.0",
-    "@types/react-router-dom": "^4.3.1",
-    "@types/reactstrap": "^6.4.2",
     "bootstrap": "^4.1.3",
     "browserparse": "../../browserparse",
     "cytoscape-automove": "^1.10.0",
@@ -27,8 +21,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "3.1.0",
     "react-sliding-pane": "^3.1.0",
-    "reactstrap": "^6.5.0",
-    "tslint-consistent-codestyle": "^1.14.1"
+    "reactstrap": "^6.5.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -40,13 +33,20 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
+    "@types/cytoscape": "^3.2.8",
     "@types/jest": "^23.3.8",
+    "@types/jquery": "^3.3.29",
     "@types/react": "^16.4.18",
     "@types/react-dom": "^16.0.9",
+    "@types/react-dropzone": "^4.2.2",
+    "@types/react-modal": "^3.6.0",
+    "@types/react-router-dom": "^4.3.1",
+    "@types/reactstrap": "^6.4.2",
     "patch-package": "^5.1.1",
     "postinstall-prepare": "^1.0.1",
     "prettier": "^1.15.3",
     "sw-precache": "^5.2.1",
+    "tslint-consistent-codestyle": "^1.14.1",
     "typescript": "^3.1.4"
   }
 }
