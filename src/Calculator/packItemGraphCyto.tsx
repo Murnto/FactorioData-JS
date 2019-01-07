@@ -24,9 +24,9 @@ const cytoStyle = [
     css: {
       // 'background-color': '#000',
       // 'background-fit': 'cover',
-      "background-image": imageMapper,
       "background-opacity": "0",
       content: countMapper,
+      "font-size": 12,
       height: 32,
       shape: "rectangle",
       width: 32
@@ -48,6 +48,8 @@ const cytoStyle = [
   },
   {
     css: {
+      "background-color": "#888888",
+      "background-opacity": "0.5",
       content: labelMapper,
       "text-halign": "center",
       "text-valign": "center"
