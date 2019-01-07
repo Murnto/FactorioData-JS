@@ -19,6 +19,55 @@ import { ItemSelector } from "./calcItemSelectorComponent";
 import { PrototypeHasIcon } from "../types/factorio.prototype";
 import { CalcNodeSettings } from "./calcNodeSettings";
 
+/* tslint:disable */
+const gridOptions = {
+  // On/Off Modules
+  /* From the following four snap options, at most one should be true at a given time */
+  snapToGridOnRelease: true, // Snap to grid on release
+  snapToGridDuringDrag: true, // Snap to grid during drag
+  snapToAlignmentLocationOnRelease: false, // Snap to alignment location on release
+  snapToAlignmentLocationDuringDrag: false, // Snap to alignment location during drag
+  distributionGuidelines: true, // Distribution guidelines
+  geometricGuideline: true, // Geometric guidelines
+  initPosAlignment: false, // Guideline to initial mouse position
+  centerToEdgeAlignment: false, // Center to edge alignment
+  resize: false, // Adjust node sizes to cell sizes
+  parentPadding: true, // Adjust parent sizes to cell sizes by padding
+  drawGrid: true, // Draw grid background
+
+  // General
+  gridSpacing: 20, // Distance between the lines of the grid.
+
+  // Draw Grid
+  zoomDash: true, // Determines whether the size of the dashes should change when the drawing is zoomed in and out if grid is drawn.
+  panGrid: true, // Determines whether the grid should move then the user moves the graph if grid is drawn.
+  gridStackOrder: -1, // Namely z-index
+  gridColor: "#dedede", // Color of grid lines
+  lineWidth: 1.0, // Width of grid lines
+
+  // Guidelines
+  guidelinesStackOrder: 0, // z-index of guidelines -- REQUIRED so it stays below the modal
+  guidelinesTolerance: 2.0, // Tolerance distance for rendered positions of nodes' interaction.
+  guidelinesStyle: {
+    // Set ctx properties of line. Properties are here:
+    strokeStyle: "#8b7d6b", // color of geometric guidelines
+    geometricGuidelineRange: 400, // range of geometric guidelines
+    range: 100, // max range of distribution guidelines
+    minDistRange: 10, // min range for distribution guidelines
+    distGuidelineOffset: 10, // shift amount of distribution guidelines
+    horizontalDistColor: "#ff0000", // color of horizontal distribution alignment
+    verticalDistColor: "#00ff00", // color of vertical distribution alignment
+    initPosAlignmentColor: "#0000ff", // color of alignment to initial mouse location
+    lineDash: [0, 0], // line style of geometric guidelines
+    horizontalDistLine: [0, 0], // line style of horizontal distribution guidelines
+    verticalDistLine: [0, 0], // line style of vertical distribution guidelines
+    initPosAlignmentLine: [0, 0] // line style of alignment to initial mouse position
+  },
+
+  // Parent Padding
+  parentSpacing: -1 // -1 to set paddings of parents to gridSpacing
+};
+/* tslint:enable */
 const cytoStyle = [
   {
     css: {
@@ -848,33 +897,42 @@ class PackItemGraphCyto extends React.Component<
     (window as any).cy = cy;
     (window as any).cs = this.cState;
 
-    cy.on("dragfree", "node", event => {
+    (this.cy as any).gridGuide(gridOptions);
+
+    cy.on("position", "node", event => {
       /**
        * Save the new position of moved nodes after release
        */
 
       const rootNode = getRootNode(event.target);
+      const active = rootNode.active() || event.target.active();
+      const pos = rootNode.modelPosition();
 
-      console.log("[PackItemGraphCyto] dragfree", event, rootNode.id());
+      if (active || rootNode.width() === 0) {
+        // either still grabbed or this is an onload event
+        return;
+      }
+
+      console.log("[PackItemGraphCyto] position", event, rootNode.id());
 
       if (rootNode.hasClass("recipe")) {
         this.cState.recipes[rootNode.data("recipeName")].position = {
-          x: rootNode.modelPosition().x - (rootNode.width() - 40) / 2,
-          y: rootNode.modelPosition().y
+          x: pos.x - (rootNode.width() - 40) / 2,
+          y: pos.y
         };
       } else if (rootNode.hasClass("source")) {
         this.cState.sourceNodes[
           `${rootNode.data("type")}-${rootNode.data("name")}`
         ].position = {
-          x: rootNode.modelPosition().x,
-          y: rootNode.modelPosition().y
+          x: pos.x,
+          y: pos.y
         };
       } else if (rootNode.hasClass("target")) {
         this.cState.targets[
           `${rootNode.data("type")}-${rootNode.data("name")}`
         ].position = {
-          x: rootNode.modelPosition().x,
-          y: rootNode.modelPosition().y
+          x: pos.x,
+          y: pos.y
         };
       }
 

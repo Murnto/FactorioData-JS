@@ -5,7 +5,11 @@ import { Core, CytoscapeOptions } from "cytoscape";
 import automove from "cytoscape-automove";
 // @ts-ignore
 import cxtmenu from "cytoscape-cxtmenu";
+// @ts-ignore
+import gridGuide from "cytoscape-grid-guide";
+import * as jquery from "jquery";
 
+gridGuide(cytoscape, jquery);
 cytoscape.use(automove);
 cytoscape.use(cxtmenu);
 
