@@ -146,11 +146,13 @@ export class TechInfo extends React.Component<
     const recipeUnlockedBy: Recipe[] = [];
     const otherEffects: Effect[] = [];
 
-    for (const pre of tech.prerequisites) {
-      const preTech = data.technologies[pre];
+    if (tech.prerequisites !== undefined) {
+      for (const pre of tech.prerequisites) {
+        const preTech = data.technologies[pre];
 
-      if (preTech !== undefined) {
-        techRequired.push(preTech);
+        if (preTech !== undefined) {
+          techRequired.push(preTech);
+        }
       }
     }
 
