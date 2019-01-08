@@ -4,6 +4,7 @@ import { Prototype, PrototypeHasIcon } from "./types/factorio.prototype";
 import { Technology } from "./types/factorio.technology";
 import { AssemblingMachine } from "./types/factorio.assemblignmachine";
 import { Furnace } from "./types/factorio.furnace";
+import * as React from "react";
 
 const itemTypes = [
   "fluid",
@@ -35,6 +36,9 @@ interface KnownThings {
 
   [type: string]: { [name: string]: Prototype };
 }
+
+// tslint:disable-next-line
+export const PackContext = React.createContext(null as PackLoadedData | null);
 
 export class PackLoadedData {
   public isLoaded: boolean = false;

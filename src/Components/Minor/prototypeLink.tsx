@@ -7,27 +7,28 @@ import {
 } from "../../util";
 import { PrototypeHasIcon } from "../../types/factorio.prototype";
 import { Link } from "react-router-dom";
-import { PackLoadedData } from "../../packLoadedData";
 import { PrototypeIcon } from "./prototypeIcon";
 import { CSSProperties } from "react";
+import { PackComponent } from "../../Utils/packComponent";
 
 type PrototypeLinkProps = Either<PrototypeHasIcon> & {
-  data: PackLoadedData;
   hideIcon?: boolean;
   hideName?: boolean;
   onClick?: (item: PrototypeHasIcon) => void;
   to?: string;
 };
 
+interface PrototypeLinkState {
+  item: PrototypeHasIcon | null;
+}
+
 const linkStyle: CSSProperties = {
   marginLeft: 4
 };
 
-export class PrototypeLink extends React.Component<
+export class PrototypeLink extends PackComponent<
   PrototypeLinkProps,
-  {
-    item: PrototypeHasIcon | null;
-  }
+  PrototypeLinkState
 > {
   public constructor(p: PrototypeLinkProps, s?: any) {
     super(p, s);
@@ -40,7 +41,7 @@ export class PrototypeLink extends React.Component<
   public componentDidMount() {
     if (!this.state.item) {
       this.setState({
-        item: resolveEitherToPrototype(this.props)
+        item: resolveEitherToPrototype(this.data, this.props)
       });
     }
   }
@@ -57,14 +58,14 @@ export class PrototypeLink extends React.Component<
       });
     } else if (pPntd.type !== ppPntd.type || pPntd.name !== ppPntd.name) {
       this.setState({
-        item: resolveEitherToPrototype(this.props)
+        item: resolveEitherToPrototype(this.data, this.props)
       });
     }
   }
 
   public render() {
     const { item } = this.state;
-    const { hideIcon, hideName, data, onClick } = this.props;
+    const { hideIcon, hideName, onClick } = this.props;
 
     if (item === null || item === undefined) {
       return <span>Error</span>;
@@ -78,7 +79,7 @@ export class PrototypeLink extends React.Component<
             {!hideName && <span style={linkStyle}>{item.title}</span>}
           </span>
         )) || (
-          <Link to={this.props.to || data.link.toItem(item)}>
+          <Link to={this.props.to || this.data.link.toItem(item)}>
             {!hideIcon && <PrototypeIcon item={item} />}
             {!hideName && <span style={linkStyle}>{item.title}</span>}
           </Link>

@@ -1,10 +1,11 @@
 import * as React from "react";
-import { PackLoadedData } from "../packLoadedData";
 import { PrototypeLink } from "./Minor/prototypeLink";
 import { Container, FormGroup, Input } from "reactstrap";
 import { Item } from "../types/factorio.item";
 import { CSSProperties } from "react";
 import Timeout = NodeJS.Timeout;
+import { PackComponent } from "../Utils/packComponent";
+import { RouteComponentProps } from "react-router";
 
 const defaultSearch = "iron";
 const searchStyles: CSSProperties = {
@@ -16,8 +17,8 @@ interface PackItemSearchState {
   searchResults: Item[];
 }
 
-export class PackItemSearch extends React.Component<
-  { data: PackLoadedData; match: any },
+export class PackItemSearch extends PackComponent<
+  RouteComponentProps,
   PackItemSearchState
 > {
   private delayedSearch: Timeout | null = null;
@@ -27,7 +28,7 @@ export class PackItemSearch extends React.Component<
 
     this.state = {
       search: "",
-      searchResults: this.props.data.searchItems(defaultSearch)
+      searchResults: this.data.searchItems(defaultSearch)
     };
   }
 
@@ -39,7 +40,6 @@ export class PackItemSearch extends React.Component<
   }
 
   public render() {
-    const { data } = this.props;
     const { searchResults } = this.state;
 
     return (
@@ -72,7 +72,7 @@ export class PackItemSearch extends React.Component<
               <tr key={object.type + ":" + object.name}>
                 <td>{object.type}</td>
                 <td>
-                  <PrototypeLink item={object} data={data} />
+                  <PrototypeLink item={object} />
                 </td>
               </tr>
             ))}
@@ -87,7 +87,7 @@ export class PackItemSearch extends React.Component<
 
     const { search } = this.state;
     this.setState({
-      searchResults: this.props.data.searchItems(
+      searchResults: this.data.searchItems(
         search.length === 0 ? defaultSearch : search
       )
     });

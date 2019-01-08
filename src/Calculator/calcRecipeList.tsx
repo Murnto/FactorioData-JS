@@ -1,16 +1,17 @@
 import * as React from "react";
 import { Recipe } from "../types/factorio.recipe";
 import { RecipeSingle } from "../Components/Minor/recipeSingle";
-import { PackLoadedData } from "../packLoadedData";
+import { PackComponent } from "../Utils/packComponent";
 
-export class CalcRecipeList extends React.Component<{
-  data: PackLoadedData;
+interface CalcRecipeListProps {
   noTechUnlocks?: boolean;
   recipeNameCallback: (name: string) => void;
   recipes: Recipe[];
-}> {
+}
+
+export class CalcRecipeList extends PackComponent<CalcRecipeListProps> {
   public render() {
-    const { recipes, data, noTechUnlocks, recipeNameCallback } = this.props;
+    const { recipes, noTechUnlocks, recipeNameCallback } = this.props;
 
     if (!recipes || recipes.length === 0) {
       return <div>No recipes found?</div>;
@@ -33,7 +34,6 @@ export class CalcRecipeList extends React.Component<{
           {recipes.map(recipe => (
             <RecipeSingle
               key={recipe.name}
-              data={data}
               recipe={recipe}
               noTechUnlocks={noTechUnlocks}
               noCategoryLinks
@@ -46,11 +46,8 @@ export class CalcRecipeList extends React.Component<{
   }
 
   public shouldComponentUpdate(
-    nextProps: Readonly<{ data: PackLoadedData; recipes: Recipe[] }>
+    nextProps: Readonly<CalcRecipeListProps>
   ): boolean {
-    return (
-      this.props.recipes !== nextProps.recipes ||
-      this.props.data.packId !== nextProps.data.packId
-    );
+    return this.props.recipes !== nextProps.recipes;
   }
 }

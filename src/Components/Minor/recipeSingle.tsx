@@ -1,23 +1,26 @@
 import * as React from "react";
 import { Recipe } from "../../types/factorio.recipe";
 import { GroupedItemAmounts } from "./groupedItemAmounts";
-import { PackLoadedData } from "../../packLoadedData";
 import { PrototypeIcon } from "./prototypeIcon";
 import { PrototypeLink } from "./prototypeLink";
 import { Technology } from "../../types/factorio.technology";
 import { Link } from "react-router-dom";
+import { PackComponent } from "../../Utils/packComponent";
 
-export class RecipeSingle extends React.Component<
-  {
-    data: PackLoadedData;
-    noCategoryLinks?: boolean;
-    noTechUnlocks?: boolean;
-    recipe: Recipe;
-    recipeNameCallback?: (name: string) => void;
-  },
-  {
-    techUnlockedBy: Technology[] | null;
-  }
+interface RecipeSingleProps {
+  noCategoryLinks?: boolean;
+  noTechUnlocks?: boolean;
+  recipe: Recipe;
+  recipeNameCallback?: (name: string) => void;
+}
+
+interface RecipeSingleState {
+  techUnlockedBy: Technology[] | null;
+}
+
+export class RecipeSingle extends PackComponent<
+  RecipeSingleProps,
+  RecipeSingleState
 > {
   constructor(p: any, s?: any) {
     super(p, s);
@@ -28,20 +31,15 @@ export class RecipeSingle extends React.Component<
   }
 
   public componentDidMount() {
-    const { recipe, data, noTechUnlocks } = this.props;
+    const { recipe, noTechUnlocks } = this.props;
 
     if (!noTechUnlocks) {
-      this.setState({ techUnlockedBy: data.technologyUnlockedBy(recipe) });
+      this.setState({ techUnlockedBy: this.data.technologyUnlockedBy(recipe) });
     }
   }
 
-  // public componentDidUpdate() {
-  //     const {recipe, data} = this.props;
-  //     this.setState({techUnlockedBy: data.technologyUnlockedBy(recipe)})
-  // }
-
   public render() {
-    const { recipe, data, noTechUnlocks, noCategoryLinks } = this.props;
+    const { recipe, noTechUnlocks, noCategoryLinks } = this.props;
     const { techUnlockedBy } = this.state;
 
     if (!noTechUnlocks && techUnlockedBy === null) {
@@ -56,9 +54,7 @@ export class RecipeSingle extends React.Component<
         <td>
           {(!noCategoryLinks && (
             <Link
-              to={`/pack/${this.props.data.packId}/craftingCat/${
-                recipe.category
-              }`}
+              to={`/pack/${this.data.packId}/craftingCat/${recipe.category}`}
             >
               {recipe.category}
             </Link>
@@ -71,10 +67,10 @@ export class RecipeSingle extends React.Component<
           </span>
         </td>
         <td>
-          <GroupedItemAmounts data={data} items={recipe.ingredients} />
+          <GroupedItemAmounts items={recipe.ingredients} />
         </td>
         <td>
-          <GroupedItemAmounts data={data} items={recipe.results} />
+          <GroupedItemAmounts items={recipe.results} />
         </td>
         <td>{recipe.energy_required}</td>
         {!noTechUnlocks && (
@@ -82,8 +78,7 @@ export class RecipeSingle extends React.Component<
             {techUnlockedBy!.map(object => (
               <PrototypeLink
                 key={object.name}
-                to={data.link.toTech(object)}
-                data={data}
+                to={this.data.link.toTech(object)}
                 item={object}
               />
             ))}

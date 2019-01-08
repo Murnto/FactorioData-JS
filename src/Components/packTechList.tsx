@@ -1,16 +1,16 @@
 import * as React from "react";
-import { PackLoadedData } from "../packLoadedData";
 import Container from "reactstrap/lib/Container";
 import { TechList } from "./Minor/techList";
+import { PackComponent } from "../Utils/packComponent";
 
-export function PackTechList(props: { data: PackLoadedData }) {
-  const { data } = props;
+export class PackTechList extends PackComponent {
+  public render() {
+    const technologies = Object.values(this.data.technologies);
 
-  const technologies = Object.values(data.technologies);
-
-  return (
-    <Container>
-      <TechList technologies={technologies} data={data} />
-    </Container>
-  );
+    return (
+      <Container>
+        <TechList technologies={technologies} />
+      </Container>
+    );
+  }
 }

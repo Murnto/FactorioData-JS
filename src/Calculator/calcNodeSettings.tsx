@@ -1,5 +1,4 @@
 import * as React from "react";
-import { PackLoadedData } from "../packLoadedData";
 import { Col, Form, FormGroup, Input, Label } from "reactstrap";
 import { SettingsPaneState } from "./packItemGraphCyto";
 import {
@@ -8,10 +7,10 @@ import {
   CalcRecipe,
   CalcState
 } from "./calcState";
+import { PackComponent } from "../Utils/packComponent";
 
 interface CalcNodeSettingsProps {
   cState: CalcState;
-  data: PackLoadedData;
   info: SettingsPaneState;
   onUpdate: () => void;
 }
@@ -22,7 +21,7 @@ interface CalcNodeSettingsState {
   search: string;
 }
 
-export class CalcNodeSettings extends React.Component<
+export class CalcNodeSettings extends PackComponent<
   CalcNodeSettingsProps,
   CalcNodeSettingsState
 > {

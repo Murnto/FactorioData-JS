@@ -1,7 +1,7 @@
 import * as React from "react";
-import { PackLoadedData } from "../../packLoadedData";
 import { PrototypeHasIcon } from "../../types/factorio.prototype";
 import ReactJson from "react-json-view";
+import { PackComponent } from "../../Utils/packComponent";
 
 const entries: any[][] = [
   ["title", "Title"],
@@ -38,11 +38,10 @@ const entries: any[][] = [
 ];
 
 interface EntityInfoBoxProps {
-  data: PackLoadedData;
   entity: PrototypeHasIcon;
 }
 
-export class EntityInfoBox extends React.Component<EntityInfoBoxProps> {
+export class EntityInfoBox extends PackComponent<EntityInfoBoxProps> {
   public render() {
     const { entity } = this.props;
 

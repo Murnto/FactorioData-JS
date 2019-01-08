@@ -1,5 +1,4 @@
 import * as React from "react";
-import { PackLoadedData } from "../packLoadedData";
 import { Container } from "reactstrap";
 import Button from "reactstrap/lib/Button";
 import Popover from "reactstrap/lib/Popover";
@@ -8,26 +7,24 @@ import PopoverBody from "reactstrap/lib/PopoverBody";
 import { PrototypeIcon } from "./Minor/prototypeIcon";
 import { PrototypeLink } from "./Minor/prototypeLink";
 import { PopoverItemRecipe } from "./Minor/popoverItemRecipe";
+import { PackComponent } from "../Utils/packComponent";
+import { RouteComponentProps } from "react-router";
 
-export class PackComponentTest extends React.Component<{
-  data: PackLoadedData;
-  match: any;
-}> {
+export class PackComponentTest extends PackComponent<RouteComponentProps> {
   public state = {
     popoverOpen: false
   };
 
   public render() {
-    const { data } = this.props;
-    const item = data.findPrototype("item", "iron-plate");
+    const item = this.data.findPrototype("item", "iron-plate");
 
     return (
       <Container>
         {this.renderPopoverTest()}
-        <PopoverItemRecipe data={data} item={item!}>
-          <PrototypeIcon item={item as any} data={data} />
+        <PopoverItemRecipe item={item!}>
+          <PrototypeIcon item={item as any} />
         </PopoverItemRecipe>
-        <PrototypeLink type="item" name="iron-plate" data={data} />
+        <PrototypeLink type="item" name="iron-plate" />
       </Container>
     );
   }

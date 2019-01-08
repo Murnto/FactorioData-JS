@@ -1,22 +1,19 @@
 import * as React from "react";
-import { PackLoadedData } from "../../packLoadedData";
 import { PrototypeLink } from "./prototypeLink";
 import { Technology } from "../../types/factorio.technology";
 import { Link } from "react-router-dom";
+import { PackComponent } from "../../Utils/packComponent";
 
-export class TechSingle extends React.Component<{
-  data: PackLoadedData;
+export class TechSingle extends PackComponent<{
   tech: Technology;
 }> {
   public render() {
-    const { tech, data } = this.props;
+    const { tech } = this.props;
 
     return (
       <tr>
         <td>
-          <Link to={`/pack/${data.packId}/tech/${tech.name}`}>
-            {tech.title}
-          </Link>
+          <Link to={this.data.link.toTech(tech)}>{tech.title}</Link>
         </td>
         <td>
           <div className="tech-units">
@@ -30,12 +27,7 @@ export class TechSingle extends React.Component<{
                   }}
                 >
                   {ingd.amount}x
-                  <PrototypeLink
-                    name={ingd.name}
-                    type={ingd.type}
-                    data={data}
-                    hideName
-                  />
+                  <PrototypeLink name={ingd.name} type={ingd.type} hideName />
                 </div>
               ))}
             x {tech.unit.count}

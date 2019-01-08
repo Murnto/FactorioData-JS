@@ -1,14 +1,15 @@
 import * as React from "react";
-import { PackLoadedData } from "../../packLoadedData";
 import { Technology } from "../../types/factorio.technology";
 import { TechSingle } from "./techSingle";
+import { PackComponent } from "../../Utils/packComponent";
 
-export class TechList extends React.Component<{
-  data: PackLoadedData;
+interface TechListProps {
   technologies: Technology[];
-}> {
+}
+
+export class TechList extends PackComponent<TechListProps> {
   public render() {
-    const { technologies, data } = this.props;
+    const { technologies } = this.props;
 
     if (!technologies || technologies.length === 0) {
       return <div>No technologies found?</div>;
@@ -24,18 +25,13 @@ export class TechList extends React.Component<{
         </thead>
         <tbody>
           {technologies.map(tech => (
-            <TechSingle key={tech.name} data={data} tech={tech} />
+            <TechSingle key={tech.name} tech={tech} />
           ))}
         </tbody>
       </table>
     );
   }
-  public shouldComponentUpdate(
-    nextProps: Readonly<{ data: PackLoadedData; technologies: Technology[] }>
-  ): boolean {
-    return (
-      this.props.technologies !== nextProps.technologies ||
-      this.props.data.packId !== nextProps.data.packId
-    );
+  public shouldComponentUpdate(nextProps: Readonly<TechListProps>): boolean {
+    return this.props.technologies !== nextProps.technologies;
   }
 }

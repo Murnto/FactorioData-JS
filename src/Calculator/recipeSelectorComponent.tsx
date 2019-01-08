@@ -1,7 +1,7 @@
 import * as React from "react";
-import { PackLoadedData } from "../packLoadedData";
 import { Recipe } from "../types/factorio.recipe";
 import { CalcRecipeList } from "./calcRecipeList";
+import { PackComponent } from "../Utils/packComponent";
 
 type SelectorQueryType = "recipe" | "ingredient" | "result";
 
@@ -12,7 +12,6 @@ export interface SelectorQuery {
 }
 
 interface RecipeSelectorProps {
-  data: PackLoadedData;
   onRecipeSelected: (recipe: Recipe) => void;
   query?: SelectorQuery;
 }
@@ -21,7 +20,7 @@ interface RecipeSelectorState {
   recipes: Recipe[];
 }
 
-export class RecipeSelector extends React.Component<
+export class RecipeSelector extends PackComponent<
   RecipeSelectorProps,
   RecipeSelectorState
 > {
@@ -40,13 +39,13 @@ export class RecipeSelector extends React.Component<
     if (this.props.query) {
       switch (this.props.query.queryType) {
         case "ingredient":
-          recipes = this.props.data.recipesUsedIn(
+          recipes = this.data.recipesUsedIn(
             this.props.query.type!,
             this.props.query.name
           );
           break;
         case "result":
-          recipes = this.props.data.recipesProducing(
+          recipes = this.data.recipesProducing(
             this.props.query.type!,
             this.props.query.name
           );
@@ -73,7 +72,6 @@ export class RecipeSelector extends React.Component<
   public render(): React.ReactNode {
     return (
       <CalcRecipeList
-        data={this.props.data}
         recipes={this.state.recipes}
         noTechUnlocks={true}
         recipeNameCallback={this.recipeCallback}
@@ -82,6 +80,6 @@ export class RecipeSelector extends React.Component<
   }
 
   private recipeCallback = (name: string) => {
-    this.props.onRecipeSelected(this.props.data.recipes[name]);
+    this.props.onRecipeSelected(this.data.recipes[name]);
   };
 }

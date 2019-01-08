@@ -1,12 +1,11 @@
 import * as React from "react";
-import { PackLoadedData } from "../packLoadedData";
 import { Container, FormGroup, Input } from "reactstrap";
 import { PrototypeLink } from "../Components/Minor/prototypeLink";
 import { Item } from "../types/factorio.item";
 import { PrototypeHasIcon } from "../types/factorio.prototype";
+import { PackComponent } from "../Utils/packComponent";
 
 interface ItemSelectorProps {
-  data: PackLoadedData;
   onItemSelected: (item: PrototypeHasIcon) => void;
 }
 
@@ -15,7 +14,7 @@ interface ItemSelectorState {
   searchResults: Item[];
 }
 
-export class ItemSelector extends React.Component<
+export class ItemSelector extends PackComponent<
   ItemSelectorProps,
   ItemSelectorState
 > {
@@ -29,7 +28,6 @@ export class ItemSelector extends React.Component<
   }
 
   public render(): React.ReactNode {
-    const { data } = this.props;
     const { searchResults } = this.state;
 
     return (
@@ -62,7 +60,6 @@ export class ItemSelector extends React.Component<
                 <td>
                   <PrototypeLink
                     item={object}
-                    data={data}
                     onClick={this.props.onItemSelected}
                   />
                 </td>
@@ -75,7 +72,7 @@ export class ItemSelector extends React.Component<
   }
 
   private onSearchInput = (e: React.FormEvent<HTMLInputElement>) => {
-    const searchResults = this.props.data.searchItems(e.currentTarget.value);
+    const searchResults = this.data.searchItems(e.currentTarget.value);
     // console.log('[PackItemSearch] Search update:', e.currentTarget.value, searchResults.length);
 
     this.setState({

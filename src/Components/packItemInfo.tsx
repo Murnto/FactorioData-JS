@@ -2,16 +2,22 @@ import * as React from "react";
 import { Item } from "../types/factorio.item";
 import { PrototypeIcon } from "./Minor/prototypeIcon";
 import { RecipeList } from "./Minor/recipeList";
-import { PackLoadedData } from "../packLoadedData";
 import { Recipe } from "../types/factorio.recipe";
 import { PrototypeHasIcon } from "../types/factorio.prototype";
 import { EntityInfoBox } from "./InfoBox/entityInfoBox";
 import { CSSProperties } from "react";
 import { ItemInfoBox } from "./InfoBox/itemInfoBox";
+import { RouteComponentProps } from "react-router";
+import { PackComponent } from "../Utils/packComponent";
 
 const recipeListStyle: CSSProperties = {
   display: "flow-root"
 };
+
+type PackItemInfoProps = RouteComponentProps<{
+  itemName: string;
+  itemType: string;
+}>;
 
 interface PackItemInfoState {
   entity: PrototypeHasIcon | null;
@@ -20,8 +26,8 @@ interface PackItemInfoState {
   recipesUsedIn: Recipe[] | null;
 }
 
-export class PackItemInfo extends React.Component<
-  { data: PackLoadedData; match: any },
+export class PackItemInfo extends PackComponent<
+  PackItemInfoProps,
   PackItemInfoState
 > {
   constructor(p: any, s?: any) {
@@ -39,22 +45,27 @@ export class PackItemInfo extends React.Component<
     this.initInfo();
   }
 
-  public componentDidUpdate(prevProps: { data: PackLoadedData; match: any }) {
+  public componentDidUpdate(prevProps: PackItemInfoProps) {
     if (
       prevProps.match.params.itemType !== this.props.match.params.itemType ||
-      prevProps.match.params.itemName !== this.props.match.params.itemName ||
-      prevProps.data.packId !== this.props.data.packId
+      prevProps.match.params.itemName !== this.props.match.params.itemName
     ) {
       this.initInfo();
     }
   }
 
   public render() {
-    const { match, data } = this.props;
-    const { itemType, itemName, packId } = match.params;
+    const { match } = this.props;
+    const { itemType, itemName } = match.params;
     const { entity, item, recipesProducing, recipesUsedIn } = this.state;
 
-    console.log("[PackItemInfo] Render with", packId, itemType, itemName, item);
+    console.log(
+      "[PackItemInfo] Render with",
+      this.data.packId,
+      itemType,
+      itemName,
+      item
+    );
 
     if (recipesProducing === null || recipesUsedIn === null) {
       return <div>Loading item info</div>;
@@ -66,8 +77,8 @@ export class PackItemInfo extends React.Component<
           marginTop: "1em"
         }}
       >
-        {(entity && <EntityInfoBox data={data} entity={entity} />) ||
-          (item && <ItemInfoBox data={data} item={item} />)}
+        {(entity && <EntityInfoBox entity={entity} />) ||
+          (item && <ItemInfoBox item={item} />)}
 
         {(item !== null && (
           <div>
@@ -84,13 +95,13 @@ export class PackItemInfo extends React.Component<
         {recipesProducing.length > 0 && (
           <div style={recipeListStyle}>
             <h3>Recipes</h3>
-            <RecipeList data={data} recipes={recipesProducing} />
+            <RecipeList recipes={recipesProducing} />
           </div>
         )}
         {recipesUsedIn.length > 0 && (
           <div style={recipeListStyle}>
             <h3>Used in</h3>
-            <RecipeList data={data} recipes={recipesUsedIn} />
+            <RecipeList recipes={recipesUsedIn} />
           </div>
         )}
       </div>
@@ -98,14 +109,13 @@ export class PackItemInfo extends React.Component<
   }
 
   public shouldComponentUpdate(
-    nextProps: Readonly<{ data: PackLoadedData; match: any }>,
+    nextProps: Readonly<PackItemInfoProps>,
     nextState: Readonly<PackItemInfoState>
   ): boolean {
     console.log("shouldComponentUpdate(", nextProps, nextState, ")");
     return (
       this.props.match.params.itemType !== nextProps.match.params.itemType ||
       this.props.match.params.itemName !== nextProps.match.params.itemName ||
-      this.props.data.packId !== nextProps.data.packId ||
       this.state.item !== nextState.item ||
       this.state.recipesUsedIn !== nextState.recipesUsedIn ||
       this.state.recipesProducing !== nextState.recipesProducing
@@ -113,19 +123,19 @@ export class PackItemInfo extends React.Component<
   }
 
   private initInfo() {
-    const { match, data } = this.props;
+    const { match } = this.props;
     const { itemType, itemName } = match.params;
 
     console.time(`initInfo:${itemType}:${itemName}`);
 
-    const item = data.findItem(itemType, itemName);
-    const entity = data.findReferencedPrototype(item);
+    const item = this.data.findItem(itemType, itemName);
+    const entity = this.data.findReferencedPrototype(item);
 
     this.setState({
       entity,
       item,
-      recipesProducing: data.recipesProducing(itemType, itemName),
-      recipesUsedIn: data.recipesUsedIn(itemType, itemName)
+      recipesProducing: this.data.recipesProducing(itemType, itemName),
+      recipesUsedIn: this.data.recipesUsedIn(itemType, itemName)
     });
 
     console.timeEnd(`initInfo:${itemType}:${itemName}`);

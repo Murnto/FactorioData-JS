@@ -1,6 +1,6 @@
 import * as React from "react";
 import { RouteComponentProps, Switch } from "react-router-dom";
-import { PackLoadedData } from "../packLoadedData";
+import { PackContext, PackLoadedData } from "../packLoadedData";
 import { PackItemSearch } from "./packItemSearch";
 import { PropsRoute } from "../util";
 import { PackTechList } from "./packTechList";
@@ -63,49 +63,51 @@ export default class PackConfig extends React.Component<
     }
 
     return (
-      <Switch>
-        <PropsRoute
-          exact
-          path={`${match.path}`}
-          component={PackItemSearch}
-          data={data}
-        />
-        <PropsRoute path={`${match.path}/info`} component={PackInfo} />
-        <PropsRoute
-          path={`${match.path}/test`}
-          component={PackComponentTest}
-          data={data}
-        />
-        <PropsRoute
-          exact
-          path={`${match.path}/tech`}
-          component={PackTechList}
-          data={data}
-        />
-        {/*<PropsRoute exact path={`${match.path}/graph`} component={PackItemGraph} data={data}/>*/}
-        {/*<PropsRoute exact path={`${match.path}/graph2`} component={PackItemGraphGL} data={data}/>*/}
-        <PropsRoute
-          exact
-          path={`${match.path}/graph3`}
-          component={PackItemGraphCyto}
-          data={data}
-        />
-        <PropsRoute
-          path={`${match.path}/tech/:techName`}
-          component={TechInfo}
-          data={data}
-        />
-        <PropsRoute
-          path={`${match.path}/craftingCat/:category`}
-          component={CraftingCategoryInfo}
-          data={data}
-        />
-        <PropsRoute
-          path={`${match.path}/i/:itemType/:itemName`}
-          component={PackItemInfo}
-          data={data}
-        />
-      </Switch>
+      <PackContext.Provider value={data}>
+        <Switch>
+          <PropsRoute
+            exact
+            path={`${match.path}`}
+            component={PackItemSearch}
+            data={data}
+          />
+          <PropsRoute path={`${match.path}/info`} component={PackInfo} />
+          <PropsRoute
+            path={`${match.path}/test`}
+            component={PackComponentTest}
+            data={data}
+          />
+          <PropsRoute
+            exact
+            path={`${match.path}/tech`}
+            component={PackTechList}
+            data={data}
+          />
+          {/*<PropsRoute exact path={`${match.path}/graph`} component={PackItemGraph} data={data}/>*/}
+          {/*<PropsRoute exact path={`${match.path}/graph2`} component={PackItemGraphGL} data={data}/>*/}
+          <PropsRoute
+            exact
+            path={`${match.path}/graph3`}
+            component={PackItemGraphCyto}
+            data={data}
+          />
+          <PropsRoute
+            path={`${match.path}/tech/:techName`}
+            component={TechInfo}
+            data={data}
+          />
+          <PropsRoute
+            path={`${match.path}/craftingCat/:category`}
+            component={CraftingCategoryInfo}
+            data={data}
+          />
+          <PropsRoute
+            path={`${match.path}/i/:itemType/:itemName`}
+            component={PackItemInfo}
+            data={data}
+          />
+        </Switch>
+      </PackContext.Provider>
     );
   }
 

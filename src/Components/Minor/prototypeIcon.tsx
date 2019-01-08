@@ -7,6 +7,7 @@ import {
   resolveEitherToPrototype
 } from "../../util";
 import { PrototypeHasIcon } from "../../types/factorio.prototype";
+import { PackComponent } from "../../Utils/packComponent";
 
 const iconStyle: CSSProperties = {
   height: 32,
@@ -30,7 +31,7 @@ const itemBrokenImage: CSSProperties = {
 
 type PrototypeIconProps = Either<PrototypeHasIcon> & { missingOk?: boolean };
 
-export class PrototypeIcon extends React.Component<
+export class PrototypeIcon extends PackComponent<
   PrototypeIconProps,
   {
     item: PrototypeHasIcon | null;
@@ -47,7 +48,7 @@ export class PrototypeIcon extends React.Component<
   public componentDidMount() {
     if (!this.state.item) {
       this.setState({
-        item: resolveEitherToPrototype(this.props)
+        item: resolveEitherToPrototype(this.data, this.props)
       });
     }
   }
@@ -64,7 +65,7 @@ export class PrototypeIcon extends React.Component<
       });
     } else if (pPntd.type !== ppPntd.type || pPntd.name !== ppPntd.name) {
       this.setState({
-        item: resolveEitherToPrototype(this.props)
+        item: resolveEitherToPrototype(this.data, this.props)
       });
     }
   }

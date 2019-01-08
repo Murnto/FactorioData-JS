@@ -9,7 +9,6 @@ export interface PassedItem<T> {
 }
 
 export interface PassedNameTypeData {
-  data: PackLoadedData;
   name: string;
   type: string;
 }
@@ -20,19 +19,18 @@ export function isPassedNameTypeData<T>(
   pet: Either<T>
 ): pet is PassedNameTypeData {
   return (
-    (pet as any).data instanceof PackLoadedData &&
+    (pet as any).name !== undefined &&
+    (pet as any).type !== undefined &&
     (pet as any).item === undefined
   );
 }
 
 export function resolveEitherToPrototype(
+  data: PackLoadedData,
   either: Either<PrototypeHasIcon>
 ): PrototypeHasIcon | null {
   if (isPassedNameTypeData(either)) {
-    return either.data.findPrototype(
-      either.type,
-      either.name
-    ) as PrototypeHasIcon;
+    return data.findPrototype(either.type, either.name) as PrototypeHasIcon;
   }
 
   return either.item;

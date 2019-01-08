@@ -1,22 +1,19 @@
 import * as React from "react";
-import { PackLoadedData } from "../packLoadedData";
 import { AssemblingMachine } from "../types/factorio.assemblignmachine";
 import { Furnace } from "../types/factorio.furnace";
 import { RouteComponentProps } from "react-router";
 import { PrototypeLink } from "./Minor/prototypeLink";
 import { PrototypeHasIcon } from "../types/factorio.prototype";
 import { Container } from "reactstrap";
+import { PackComponent } from "../Utils/packComponent";
 
-interface CraftingCategoryInfoProps
-  extends RouteComponentProps<{ category: string }> {
-  data: PackLoadedData;
-}
+type CraftingCategoryInfoProps = RouteComponentProps<{ category: string }>;
 
 interface CraftingCategoryInfoState {
   crafters: Array<AssemblingMachine | Furnace> | null;
 }
 
-export class CraftingCategoryInfo extends React.Component<
+export class CraftingCategoryInfo extends PackComponent<
   CraftingCategoryInfoProps,
   CraftingCategoryInfoState
 > {
@@ -30,14 +27,12 @@ export class CraftingCategoryInfo extends React.Component<
 
   public componentDidMount() {
     this.setState({
-      crafters: this.props.data.craftersWithCategory(
-        this.props.match.params.category
-      )
+      crafters: this.data.craftersWithCategory(this.props.match.params.category)
     });
   }
 
   public render() {
-    const { match, data } = this.props;
+    const { match } = this.props;
     const { category } = match.params;
     const { crafters } = this.state;
 
@@ -65,7 +60,11 @@ export class CraftingCategoryInfo extends React.Component<
                 object.minable !== undefined &&
                 object.minable.result !== undefined
               ) {
-                const resolved = data.findItem("item", object.minable.result);
+                // TODO FIXME move to state
+                const resolved = this.data.findItem(
+                  "item",
+                  object.minable.result
+                );
 
                 if (resolved !== null) {
                   displayObj = resolved;
@@ -75,7 +74,7 @@ export class CraftingCategoryInfo extends React.Component<
               return (
                 <tr key={object.name}>
                   <td>
-                    <PrototypeLink item={displayObj} data={data} />
+                    <PrototypeLink item={displayObj} />
                   </td>
                   <td>{object.crafting_speed}</td>
                   <td>{object.energy_usage}</td>
@@ -89,12 +88,11 @@ export class CraftingCategoryInfo extends React.Component<
   }
 
   public shouldComponentUpdate(
-    nextProps: Readonly<{ data: PackLoadedData; match: any }>,
+    nextProps: Readonly<CraftingCategoryInfoProps>,
     nextState: Readonly<CraftingCategoryInfoState>
   ): boolean {
     return (
       this.props.match.params.category !== nextProps.match.params.category ||
-      this.props.data.packId !== nextProps.data.packId ||
       this.state.crafters !== nextState.crafters
     );
   }

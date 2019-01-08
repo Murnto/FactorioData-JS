@@ -1,5 +1,4 @@
 import * as React from "react";
-import { PackLoadedData } from "../packLoadedData";
 import * as cytoscape from "cytoscape";
 import {
   Core,
@@ -18,6 +17,7 @@ import "react-sliding-pane/dist/react-sliding-pane.css";
 import { ItemSelector } from "./calcItemSelectorComponent";
 import { PrototypeHasIcon } from "../types/factorio.prototype";
 import { CalcNodeSettings } from "./calcNodeSettings";
+import { PackComponent } from "../Utils/packComponent";
 
 /* tslint:disable */
 const gridOptions = {
@@ -209,9 +209,7 @@ function countMapper(ele: NodeSingular) {
   return ele.data("countStr") === "NaNx" ? "0.00x" : ele.data("countStr");
 }
 
-interface PackItemGraphCytoProps extends RouteComponentProps {
-  data: PackLoadedData;
-}
+type PackItemGraphCytoProps = RouteComponentProps;
 
 export interface SettingsPaneState {
   name?: string;
@@ -240,7 +238,7 @@ function getRootNode(node: NodeSingular): NodeSingular {
   return recipeNode;
 }
 
-class PackItemGraphCyto extends React.Component<
+class PackItemGraphCyto extends PackComponent<
   PackItemGraphCytoProps,
   PackItemGraphCytoState
 > {
@@ -290,16 +288,12 @@ class PackItemGraphCyto extends React.Component<
         >
           {this.state.bottomPaneState === "item-recipe-query" && (
             <RecipeSelector
-              data={this.props.data}
               query={this.state.query}
               onRecipeSelected={this.onRecipeSelected}
             />
           )}
           {this.state.bottomPaneState === "item-search" && (
-            <ItemSelector
-              data={this.props.data}
-              onItemSelected={this.state.itemCallback!}
-            />
+            <ItemSelector onItemSelected={this.state.itemCallback!} />
           )}
           <React.Fragment />
         </SlidingPane>
@@ -317,7 +311,6 @@ class PackItemGraphCyto extends React.Component<
           {this.state.settingsPaneState && (
             <CalcNodeSettings
               cState={this.cState}
-              data={this.props.data}
               info={this.state.settingsPaneState}
               onUpdate={this.calcUpdate}
             />
@@ -662,7 +655,7 @@ class PackItemGraphCyto extends React.Component<
     });
 
   private renderDag(): any {
-    const data = this.props.data;
+    const data = this.data;
 
     // this.cState
     //   .addRecipe("solid-fuel-hydrazine")

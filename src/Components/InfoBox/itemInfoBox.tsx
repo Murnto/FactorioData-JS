@@ -1,7 +1,7 @@
 import * as React from "react";
-import { PackLoadedData } from "../../packLoadedData";
 import ReactJson from "react-json-view";
 import { Item } from "../../types/factorio.item";
+import { PackComponent } from "../../Utils/packComponent";
 
 function toPercentage(x: number): string {
   return `${Math.round(x * 10000 + 0.00001) / 100}%`;
@@ -32,11 +32,10 @@ const entries: any[][] = [
 ];
 
 interface ItemInfoBoxProps {
-  data: PackLoadedData;
   item: Item;
 }
 
-export class ItemInfoBox extends React.Component<ItemInfoBoxProps> {
+export class ItemInfoBox extends PackComponent<ItemInfoBoxProps> {
   public render() {
     const { item } = this.props;
 
