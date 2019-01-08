@@ -1,10 +1,10 @@
 import * as React from "react";
-import { PrototypeLink } from "./Minor/prototypeLink";
+import { PrototypeLink } from "../Minor/prototypeLink";
 import { Container, FormGroup, Input } from "reactstrap";
-import { Item } from "../types/factorio.item";
+import { Item } from "../../types/factorio.item";
 import { CSSProperties } from "react";
 import Timeout = NodeJS.Timeout;
-import { PackComponent } from "../Utils/packComponent";
+import { PackComponent } from "../../Utils/packComponent";
 import { RouteComponentProps } from "react-router";
 
 const defaultSearch = "iron";
@@ -12,14 +12,14 @@ const searchStyles: CSSProperties = {
   marginTop: "1em"
 };
 
-interface PackItemSearchState {
+interface ItemSearchPageState {
   search: string;
   searchResults: Item[];
 }
 
-export class PackItemSearch extends PackComponent<
+export class ItemSearchPage extends PackComponent<
   RouteComponentProps,
-  PackItemSearchState
+  ItemSearchPageState
 > {
   private delayedSearch: Timeout | null = null;
 
@@ -94,7 +94,7 @@ export class PackItemSearch extends PackComponent<
   };
 
   private onSearchInput = (e: React.FormEvent<HTMLInputElement>) => {
-    // console.log('[PackItemSearch] Search update:', e.currentTarget.value, searchResults.length);
+    // console.log('[ItemSearchPage] Search update:', e.currentTarget.value, searchResults.length);
 
     if (this.delayedSearch !== null) {
       clearTimeout(this.delayedSearch);

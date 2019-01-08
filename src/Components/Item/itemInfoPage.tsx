@@ -1,34 +1,34 @@
 import * as React from "react";
-import { Item } from "../types/factorio.item";
-import { PrototypeIcon } from "./Minor/prototypeIcon";
-import { RecipeList } from "./Recipe/recipeList";
-import { Recipe } from "../types/factorio.recipe";
-import { PrototypeHasIcon } from "../types/factorio.prototype";
-import { EntityInfoBox } from "./InfoBox/entityInfoBox";
+import { Item } from "../../types/factorio.item";
+import { PrototypeIcon } from "../Minor/prototypeIcon";
+import { RecipeList } from "../Recipe/recipeList";
+import { Recipe } from "../../types/factorio.recipe";
+import { PrototypeHasIcon } from "../../types/factorio.prototype";
+import { EntityInfoBox } from "../InfoBox/entityInfoBox";
 import { CSSProperties } from "react";
-import { ItemInfoBox } from "./InfoBox/itemInfoBox";
+import { ItemInfoBox } from "../InfoBox/itemInfoBox";
 import { RouteComponentProps } from "react-router";
-import { PackComponent } from "../Utils/packComponent";
+import { PackComponent } from "../../Utils/packComponent";
 
 const recipeListStyle: CSSProperties = {
   display: "flow-root"
 };
 
-type PackItemInfoProps = RouteComponentProps<{
+type ItemInfoPageProps = RouteComponentProps<{
   itemName: string;
   itemType: string;
 }>;
 
-interface PackItemInfoState {
+interface ItemInfoPageState {
   entity: PrototypeHasIcon | null;
   item: Item | null;
   recipesProducing: Recipe[] | null;
   recipesUsedIn: Recipe[] | null;
 }
 
-export class PackItemInfo extends PackComponent<
-  PackItemInfoProps,
-  PackItemInfoState
+export class ItemInfoPage extends PackComponent<
+  ItemInfoPageProps,
+  ItemInfoPageState
 > {
   constructor(p: any, s?: any) {
     super(p, s);
@@ -45,7 +45,7 @@ export class PackItemInfo extends PackComponent<
     this.initInfo();
   }
 
-  public componentDidUpdate(prevProps: PackItemInfoProps) {
+  public componentDidUpdate(prevProps: ItemInfoPageProps) {
     if (
       prevProps.match.params.itemType !== this.props.match.params.itemType ||
       prevProps.match.params.itemName !== this.props.match.params.itemName
@@ -60,7 +60,7 @@ export class PackItemInfo extends PackComponent<
     const { entity, item, recipesProducing, recipesUsedIn } = this.state;
 
     console.log(
-      "[PackItemInfo] Render with",
+      "[ItemInfoPage] Render with",
       this.data.packId,
       itemType,
       itemName,
@@ -109,8 +109,8 @@ export class PackItemInfo extends PackComponent<
   }
 
   public shouldComponentUpdate(
-    nextProps: Readonly<PackItemInfoProps>,
-    nextState: Readonly<PackItemInfoState>
+    nextProps: Readonly<ItemInfoPageProps>,
+    nextState: Readonly<ItemInfoPageState>
   ): boolean {
     console.log("shouldComponentUpdate(", nextProps, nextState, ")");
     return (

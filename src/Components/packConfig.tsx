@@ -1,10 +1,10 @@
 import * as React from "react";
 import { RouteComponentProps, Switch } from "react-router-dom";
 import { PackContext, PackLoadedData } from "../packLoadedData";
-import { PackItemSearch } from "./packItemSearch";
+import { ItemSearchPage } from "./Item/itemSearchPage";
 import { PropsRoute } from "../util";
 import { TechListPage } from "./Technology/techListPage";
-import { PackItemInfo } from "./packItemInfo";
+import { ItemInfoPage } from "./Item/itemInfoPage";
 import { PackComponentTest } from "./packComponentTest";
 import { CraftingCategoryInfo } from "./craftingCategoryInfo";
 import { TechSingleInfo } from "./Technology/techSingleInfo";
@@ -68,7 +68,7 @@ export default class PackConfig extends React.Component<
           <PropsRoute
             exact
             path={`${match.path}`}
-            component={PackItemSearch}
+            component={ItemSearchPage}
             data={data}
           />
           <PropsRoute path={`${match.path}/info`} component={PackInfo} />
@@ -103,7 +103,7 @@ export default class PackConfig extends React.Component<
           />
           <PropsRoute
             path={`${match.path}/i/:itemType/:itemName`}
-            component={PackItemInfo}
+            component={ItemInfoPage}
             data={data}
           />
         </Switch>

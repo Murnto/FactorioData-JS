@@ -16,7 +16,7 @@ import {
   NavLink,
   UncontrolledDropdown
 } from "reactstrap";
-import CustomPackCreation from "./Components/customPackCreation";
+import CustomPackCreation from "./Components/CustomPack/customPackCreation";
 
 const packs = [
   {

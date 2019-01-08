@@ -4,7 +4,7 @@ import Dropzone from "react-dropzone";
 import { fromEvent } from "file-selector";
 import { FactorioMod } from "browserparse/lib/factorioMod";
 import { Button, Container, ListGroup } from "reactstrap";
-import { CustomModEntry, DecadencyStatus } from "./CustomPack/customModEntry";
+import { CustomModEntry, DecadencyStatus } from "./customModEntry";
 import { FactorioPack } from "browserparse/lib/factorioPack";
 import { ModDependencyError } from "browserparse/lib/modDependencyError";
 import * as FileSaver from "file-saver";

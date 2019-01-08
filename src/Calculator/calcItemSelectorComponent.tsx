@@ -73,7 +73,7 @@ export class ItemSelector extends PackComponent<
 
   private onSearchInput = (e: React.FormEvent<HTMLInputElement>) => {
     const searchResults = this.data.searchItems(e.currentTarget.value);
-    // console.log('[PackItemSearch] Search update:', e.currentTarget.value, searchResults.length);
+    // console.log('[ItemSearchPage] Search update:', e.currentTarget.value, searchResults.length);
 
     this.setState({
       searchResults,
