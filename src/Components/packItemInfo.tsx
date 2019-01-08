@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Item } from "../types/factorio.item";
 import { PrototypeIcon } from "./Minor/prototypeIcon";
-import { RecipeList } from "./Minor/recipeList";
+import { RecipeList } from "./Recipe/recipeList";
 import { Recipe } from "../types/factorio.recipe";
 import { PrototypeHasIcon } from "../types/factorio.prototype";
 import { EntityInfoBox } from "./InfoBox/entityInfoBox";

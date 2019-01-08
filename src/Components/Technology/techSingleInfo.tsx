@@ -1,6 +1,6 @@
 import * as React from "react";
 import { PrototypeIcon } from "../Minor/prototypeIcon";
-import { RecipeList } from "../Minor/recipeList";
+import { RecipeList } from "../Recipe/recipeList";
 import { Effect, Technology } from "../../types/factorio.technology";
 import { Recipe } from "../../types/factorio.recipe";
 import Container from "reactstrap/lib/Container";

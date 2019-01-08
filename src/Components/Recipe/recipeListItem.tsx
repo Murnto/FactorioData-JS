@@ -1,26 +1,26 @@
 import * as React from "react";
 import { Recipe } from "../../types/factorio.recipe";
-import { GroupedItemAmounts } from "./groupedItemAmounts";
-import { PrototypeIcon } from "./prototypeIcon";
-import { PrototypeLink } from "./prototypeLink";
+import { GroupedItemAmounts } from "../Minor/groupedItemAmounts";
+import { PrototypeIcon } from "../Minor/prototypeIcon";
+import { PrototypeLink } from "../Minor/prototypeLink";
 import { Technology } from "../../types/factorio.technology";
 import { Link } from "react-router-dom";
 import { PackComponent } from "../../Utils/packComponent";
 
-interface RecipeSingleProps {
+interface RecipeListItemProps {
   noCategoryLinks?: boolean;
   noTechUnlocks?: boolean;
   recipe: Recipe;
   recipeNameCallback?: (name: string) => void;
 }
 
-interface RecipeSingleState {
+interface RecipeListItemState {
   techUnlockedBy: Technology[] | null;
 }
 
-export class RecipeSingle extends PackComponent<
-  RecipeSingleProps,
-  RecipeSingleState
+export class RecipeListItem extends PackComponent<
+  RecipeListItemProps,
+  RecipeListItemState
 > {
   constructor(p: any, s?: any) {
     super(p, s);

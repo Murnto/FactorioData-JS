@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Recipe } from "../../types/factorio.recipe";
-import { RecipeSingle } from "./recipeSingle";
+import { RecipeListItem } from "./recipeListItem";
 import { PackComponent } from "../../Utils/packComponent";
 
 interface RecipeListProps {
@@ -31,7 +31,7 @@ export class RecipeList extends PackComponent<RecipeListProps> {
         </thead>
         <tbody>
           {recipes.map(recipe => (
-            <RecipeSingle
+            <RecipeListItem
               key={recipe.name}
               recipe={recipe}
               noTechUnlocks={noTechUnlocks}
