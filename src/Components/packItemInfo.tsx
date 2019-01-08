@@ -6,6 +6,11 @@ import { PackLoadedData } from "../packLoadedData";
 import { Recipe } from "../types/factorio.recipe";
 import { PrototypeHasIcon } from "../types/factorio.prototype";
 import { EntityInfoBox } from "./InfoBox/entityInfoBox";
+import { CSSProperties } from "react";
+
+const recipeListStyle: CSSProperties = {
+  display: "flow-root"
+};
 
 interface PackItemInfoState {
   entity: PrototypeHasIcon | null;
@@ -71,13 +76,13 @@ export class PackItemInfo extends React.Component<
         )}
 
         {recipesProducing.length > 0 && (
-          <div>
+          <div style={recipeListStyle}>
             <h3>Recipes</h3>
             <RecipeList data={data} recipes={recipesProducing} />
           </div>
         )}
         {recipesUsedIn.length > 0 && (
-          <div>
+          <div style={recipeListStyle}>
             <h3>Used in</h3>
             <RecipeList data={data} recipes={recipesUsedIn} />
           </div>
