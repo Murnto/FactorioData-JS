@@ -7,6 +7,7 @@ import { Recipe } from "../types/factorio.recipe";
 import { PrototypeHasIcon } from "../types/factorio.prototype";
 import { EntityInfoBox } from "./InfoBox/entityInfoBox";
 import { CSSProperties } from "react";
+import { ItemInfoBox } from "./InfoBox/itemInfoBox";
 
 const recipeListStyle: CSSProperties = {
   display: "flow-root"
@@ -60,8 +61,13 @@ export class PackItemInfo extends React.Component<
     }
 
     return (
-      <div>
-        {entity && <EntityInfoBox data={data} entity={entity} />}
+      <div
+        style={{
+          marginTop: "1em"
+        }}
+      >
+        {(entity && <EntityInfoBox data={data} entity={entity} />) ||
+          (item && <ItemInfoBox data={data} item={item} />)}
 
         {(item !== null && (
           <div>
