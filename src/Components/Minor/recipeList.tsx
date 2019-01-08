@@ -16,7 +16,7 @@ export class RecipeList extends React.Component<{
     }
 
     return (
-      <table id="table" className="table">
+      <table className="table">
         <thead>
           <tr>
             <th>Icon</th>
