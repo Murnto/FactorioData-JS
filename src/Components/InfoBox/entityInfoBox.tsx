@@ -63,16 +63,20 @@ export class EntityInfoBox extends React.Component<EntityInfoBoxProps> {
         }}
       >
         <table>
-          {entries
-            .filter(i => !!entity[i[0]])
-            .map(info => (
-              <tr key={info[0]}>
-                <td>
-                  <strong>{info[1]}:</strong>
-                </td>
-                <td>{info[2] ? info[2](entity[info[0]]) : entity[info[0]]}</td>
-              </tr>
-            ))}
+          <tbody>
+            {entries
+              .filter(i => !!entity[i[0]])
+              .map(info => (
+                <tr key={info[0]}>
+                  <td>
+                    <strong>{info[1]}:</strong>
+                  </td>
+                  <td>
+                    {info[2] ? info[2](entity[info[0]]) : entity[info[0]]}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
         </table>
         <ReactJson
           src={entity as any}
