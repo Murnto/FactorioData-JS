@@ -7,6 +7,7 @@ import { Button, Container, ListGroup } from "reactstrap";
 import { CustomModEntry, DecadencyStatus } from "./CustomPack/customModEntry";
 import { FactorioPack } from "browserparse/lib/factorioPack";
 import { ModDependencyError } from "browserparse/lib/modDependencyError";
+import * as FileSaver from "file-saver";
 // import "../repro";
 
 interface CustomPackCreationProps extends RouteComponentProps {
@@ -130,7 +131,10 @@ export default class CustomPackCreation extends React.Component<
   }
 
   private createPack = async () => {
-    await this.pack.dumpPack();
+    const packData = await this.pack.dumpPack();
+    const blob = new Blob([JSON.stringify(packData)]);
+
+    FileSaver.saveAs(blob, `${this.pack.packName}.json`);
   };
 
   private onDrop = async (accepted: File[]) => {
