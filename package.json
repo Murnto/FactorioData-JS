@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build && sw-precache --config=sw-precache-config.js",
+    "build": "react-scripts-ts build && sw-precache --config=sw-precache-config.js && uglifyjs build/service-worker.js -o build/service-worker.js",
     "format": "prettier --write \"src/**/*.{ts,tsx}\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json --fix",
     "prepare": "patch-package",
