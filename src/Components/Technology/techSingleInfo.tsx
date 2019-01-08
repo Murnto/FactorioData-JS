@@ -1,18 +1,18 @@
 import * as React from "react";
-import { PrototypeIcon } from "./Minor/prototypeIcon";
-import { RecipeList } from "./Minor/recipeList";
-import { Effect, Technology } from "../types/factorio.technology";
-import { Recipe } from "../types/factorio.recipe";
+import { PrototypeIcon } from "../Minor/prototypeIcon";
+import { RecipeList } from "../Minor/recipeList";
+import { Effect, Technology } from "../../types/factorio.technology";
+import { Recipe } from "../../types/factorio.recipe";
 import Container from "reactstrap/lib/Container";
-import { PrototypeLink } from "./Minor/prototypeLink";
+import { PrototypeLink } from "../Minor/prototypeLink";
 import { RouteComponentProps } from "react-router";
-import { PackComponent } from "../Utils/packComponent";
+import { PackComponent } from "../../Utils/packComponent";
 
-type TechInfoProps = RouteComponentProps<{
+type TechSingleInfoProps = RouteComponentProps<{
   techName: string;
 }>;
 
-interface TechInfoState {
+interface TechSingleInfoState {
   otherEffects: Effect[];
   recipeUnlockedBy: Recipe[];
   tech: Technology | null;
@@ -20,7 +20,10 @@ interface TechInfoState {
   techRequired: Technology[];
 }
 
-export class TechInfo extends PackComponent<TechInfoProps, TechInfoState> {
+export class TechSingleInfo extends PackComponent<
+  TechSingleInfoProps,
+  TechSingleInfoState
+> {
   constructor(p: any, s?: any) {
     super(p, s);
 
@@ -37,7 +40,7 @@ export class TechInfo extends PackComponent<TechInfoProps, TechInfoState> {
     this.initInfo();
   }
 
-  public componentDidUpdate(prevProps: TechInfoProps) {
+  public componentDidUpdate(prevProps: TechSingleInfoProps) {
     if (prevProps.match.params.techName !== this.props.match.params.techName) {
       this.initInfo();
     }
@@ -54,7 +57,7 @@ export class TechInfo extends PackComponent<TechInfoProps, TechInfoState> {
       recipeUnlockedBy
     } = this.state;
 
-    console.log("[TechInfo] Render with", this.data.packId, tech);
+    console.log("[TechSingleInfo] Render with", this.data.packId, tech);
 
     return (
       <Container>
@@ -110,8 +113,8 @@ export class TechInfo extends PackComponent<TechInfoProps, TechInfoState> {
   }
 
   public shouldComponentUpdate(
-    nextProps: Readonly<TechInfoProps>,
-    nextState: Readonly<TechInfoState>
+    nextProps: Readonly<TechSingleInfoProps>,
+    nextState: Readonly<TechSingleInfoState>
   ): boolean {
     console.log("shouldComponentUpdate(", nextProps, nextState, ")");
     return (
@@ -154,7 +157,7 @@ export class TechInfo extends PackComponent<TechInfoProps, TechInfoState> {
       }
     }
 
-    console.time(`loadTechInfo:${techName}`);
+    console.time(`loadTechSingleInfo:${techName}`);
     this.setState({
       otherEffects,
       recipeUnlockedBy,
@@ -162,6 +165,6 @@ export class TechInfo extends PackComponent<TechInfoProps, TechInfoState> {
       techRequired,
       techAllows: this.data.technologiesAllowed[tech.name] || []
     });
-    console.timeEnd(`loadTechInfo:${techName}`);
+    console.timeEnd(`loadTechSingleInfo:${techName}`);
   }
 }

@@ -3,11 +3,11 @@ import { RouteComponentProps, Switch } from "react-router-dom";
 import { PackContext, PackLoadedData } from "../packLoadedData";
 import { PackItemSearch } from "./packItemSearch";
 import { PropsRoute } from "../util";
-import { PackTechList } from "./packTechList";
+import { TechListPage } from "./Technology/techListPage";
 import { PackItemInfo } from "./packItemInfo";
 import { PackComponentTest } from "./packComponentTest";
 import { CraftingCategoryInfo } from "./craftingCategoryInfo";
-import { TechInfo } from "./techInfo";
+import { TechSingleInfo } from "./Technology/techSingleInfo";
 import PackItemGraphCyto from "../Calculator/packItemGraphCyto";
 
 export function PackInfo(props: RouteComponentProps) {
@@ -80,7 +80,7 @@ export default class PackConfig extends React.Component<
           <PropsRoute
             exact
             path={`${match.path}/tech`}
-            component={PackTechList}
+            component={TechListPage}
             data={data}
           />
           {/*<PropsRoute exact path={`${match.path}/graph`} component={PackItemGraph} data={data}/>*/}
@@ -93,7 +93,7 @@ export default class PackConfig extends React.Component<
           />
           <PropsRoute
             path={`${match.path}/tech/:techName`}
-            component={TechInfo}
+            component={TechSingleInfo}
             data={data}
           />
           <PropsRoute

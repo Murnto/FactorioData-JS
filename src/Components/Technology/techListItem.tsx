@@ -1,10 +1,10 @@
 import * as React from "react";
-import { PrototypeLink } from "./prototypeLink";
+import { PrototypeLink } from "../Minor/prototypeLink";
 import { Technology } from "../../types/factorio.technology";
 import { Link } from "react-router-dom";
 import { PackComponent } from "../../Utils/packComponent";
 
-export class TechSingle extends PackComponent<{
+export class TechListItem extends PackComponent<{
   tech: Technology;
 }> {
   public render() {

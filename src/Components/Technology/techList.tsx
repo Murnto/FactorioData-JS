@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Technology } from "../../types/factorio.technology";
-import { TechSingle } from "./techSingle";
+import { TechListItem } from "./techListItem";
 import { PackComponent } from "../../Utils/packComponent";
 
 interface TechListProps {
@@ -25,7 +25,7 @@ export class TechList extends PackComponent<TechListProps> {
         </thead>
         <tbody>
           {technologies.map(tech => (
-            <TechSingle key={tech.name} tech={tech} />
+            <TechListItem key={tech.name} tech={tech} />
           ))}
         </tbody>
       </table>
