@@ -86,26 +86,6 @@ export class PackLoadedData {
     return res;
   }
 
-  public findEntity(item: Item | null): PrototypeHasIcon | null {
-    if (item === null || !item.place_result) {
-      return null;
-    }
-
-    for (const type of Object.keys(this.loadedThings)) {
-      if (itemTypes.indexOf(type) !== -1 || notItems.indexOf(type) !== -1) {
-        continue;
-      }
-
-      for (const obj of Object.values(this.loadedThings[type])) {
-        if (obj.name === item.place_result) {
-          return obj;
-        }
-      }
-    }
-
-    return null;
-  }
-
   public findItem(itemOrType: Ingredient | string, name?: string): Item | null {
     if (typeof itemOrType !== "string") {
       name = itemOrType.name;
@@ -130,6 +110,33 @@ export class PackLoadedData {
         ? this.loadedThings[type][name]
         : null
       : null;
+  }
+
+  public findReferencedPrototype(item: Item | null): PrototypeHasIcon | null {
+    if (item === null) {
+      return null;
+    }
+    const target =
+      item.place_result ||
+      item.placed_as_equipment_result ||
+      item.place_as_tile;
+    if (!target) {
+      return null;
+    }
+
+    for (const type of Object.keys(this.loadedThings)) {
+      if (itemTypes.indexOf(type) !== -1 || notItems.indexOf(type) !== -1) {
+        continue;
+      }
+
+      for (const obj of Object.values(this.loadedThings[type])) {
+        if (obj.name === target) {
+          return obj;
+        }
+      }
+    }
+
+    return null;
   }
 
   public onFinishLoadingAll() {

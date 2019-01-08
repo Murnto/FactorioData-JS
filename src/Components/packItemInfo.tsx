@@ -119,7 +119,7 @@ export class PackItemInfo extends React.Component<
     console.time(`initInfo:${itemType}:${itemName}`);
 
     const item = data.findItem(itemType, itemName);
-    const entity = data.findEntity(item);
+    const entity = data.findReferencedPrototype(item);
 
     this.setState({
       entity,
