@@ -1,5 +1,5 @@
 module.exports = {
-    handleFetch: false,
+    handleFetch: true,
     minify: true,
     navigateFallback: '/index.html',
     runtimeCaching: [
