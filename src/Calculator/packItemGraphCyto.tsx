@@ -36,7 +36,7 @@ const gridOptions = {
   drawGrid: true, // Draw grid background
 
   // General
-  gridSpacing: 20, // Distance between the lines of the grid.
+  gridSpacing: 16, // Distance between the lines of the grid.
 
   // Draw Grid
   zoomDash: true, // Determines whether the size of the dashes should change when the drawing is zoomed in and out if grid is drawn.
@@ -806,7 +806,7 @@ class PackItemGraphCyto extends React.Component<
             type: rslt.type
           },
           // grabbable: false,
-          position: { x: rcpX + idx * 75, y: rcpY + 100 },
+          position: { x: rcpX + idx * 64, y: rcpY + 100 },
           selectable: false
         } as any);
 
@@ -846,7 +846,7 @@ class PackItemGraphCyto extends React.Component<
           },
           events: "no",
           // grabbable: false,
-          position: { x: rcpX + idx * 75, y: rcpY },
+          position: { x: rcpX + idx * 64, y: rcpY },
           selectable: false
         } as any);
 
