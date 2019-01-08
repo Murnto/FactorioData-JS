@@ -3,6 +3,13 @@ import { PackLoadedData } from "../packLoadedData";
 import { PrototypeLink } from "./Minor/prototypeLink";
 import { Container, FormGroup, Input } from "reactstrap";
 import { Item } from "../types/factorio.item";
+import { CSSProperties } from "react";
+import Timeout = NodeJS.Timeout;
+
+const defaultSearch = "iron";
+const searchStyles: CSSProperties = {
+  marginTop: "1em"
+};
 
 interface PackItemSearchState {
   search: string;
@@ -13,13 +20,22 @@ export class PackItemSearch extends React.Component<
   { data: PackLoadedData; match: any },
   PackItemSearchState
 > {
+  private delayedSearch: Timeout | null = null;
+
   constructor(props: any, context?: any) {
     super(props, context);
 
     this.state = {
-      search: "iron",
-      searchResults: this.props.data.searchItems("iron")
+      search: "",
+      searchResults: this.props.data.searchItems(defaultSearch)
     };
+  }
+
+  public componentWillUnmount(): void {
+    if (this.delayedSearch !== null) {
+      clearTimeout(this.delayedSearch);
+      this.delayedSearch = null;
+    }
   }
 
   public render() {
@@ -30,7 +46,9 @@ export class PackItemSearch extends React.Component<
       <Container id="item-search-box">
         <FormGroup>
           <Input
-            styles={{ marginTop: "20px" }}
+            autoFocus
+            placeholder={defaultSearch}
+            style={searchStyles}
             type="search"
             name="text"
             value={this.state.search}
@@ -64,12 +82,26 @@ export class PackItemSearch extends React.Component<
     );
   }
 
+  private doSearch = () => {
+    this.delayedSearch = null;
+
+    const { search } = this.state;
+    this.setState({
+      searchResults: this.props.data.searchItems(
+        search.length === 0 ? defaultSearch : search
+      )
+    });
+  };
+
   private onSearchInput = (e: React.FormEvent<HTMLInputElement>) => {
-    const searchResults = this.props.data.searchItems(e.currentTarget.value);
     // console.log('[PackItemSearch] Search update:', e.currentTarget.value, searchResults.length);
 
+    if (this.delayedSearch !== null) {
+      clearTimeout(this.delayedSearch);
+    }
+    this.delayedSearch = setTimeout(this.doSearch, 100);
+
     this.setState({
-      searchResults,
       search: e.currentTarget.value
     });
   };
