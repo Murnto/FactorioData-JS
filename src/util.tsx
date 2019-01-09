@@ -95,3 +95,19 @@ export function toPercentage(x: number): string {
 export function toDegrees(x: any): string {
   return `${x}°`;
 }
+
+export function extractField(field: string, obj: any): any | null {
+  const key = field.split(".");
+  let val = obj;
+
+  // evaluate key
+  while (key.length > 0 && typeof val === "object") {
+    val = val[key.shift()!];
+  }
+
+  if (key.length !== 0) {
+    return null;
+  }
+
+  return val;
+}

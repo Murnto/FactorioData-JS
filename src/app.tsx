@@ -94,11 +94,8 @@ class App extends Component<
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             {this.renderPackLink(`/pack/${currentPack}`, "Item Search")}
+            {this.renderPackLink(`/pack/${currentPack}/itemCat`, "Item Categories")}
             {this.renderPackLink(`/pack/${currentPack}/tech`, "Technology")}
-            {/*{this.renderPackLink(*/}
-            {/*`/pack/${currentPack}/itemcats`,*/}
-            {/*"Item Categories"*/}
-            {/*)}*/}
             {/*{this.renderPackLink(*/}
             {/*`/pack/${currentPack}/recipecat`,*/}
             {/*"Recipe Categories"*/}

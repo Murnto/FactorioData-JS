@@ -9,6 +9,8 @@ import { PackComponentTest } from "./packComponentTest";
 import { CraftingCategoryInfo } from "./craftingCategoryInfo";
 import { TechSingleInfo } from "./Technology/techSingleInfo";
 import PackItemGraphCyto from "../Calculator/packItemGraphCyto";
+import { ItemCategoryInfo } from "./CategoryListing/itemCategoryInfo";
+import { ItemCategoryPage } from "./CategoryListing/itemCategoryPage";
 
 export function PackInfo(props: RouteComponentProps) {
   const { match } = props as any;
@@ -99,6 +101,17 @@ export default class PackConfig extends React.Component<
           <PropsRoute
             path={`${match.path}/craftingCat/:category`}
             component={CraftingCategoryInfo}
+            data={data}
+          />
+          <PropsRoute
+            exact
+            path={`${match.path}/itemCat`}
+            component={ItemCategoryPage}
+            data={data}
+          />
+          <PropsRoute
+            path={`${match.path}/itemCat/:category`}
+            component={ItemCategoryInfo}
             data={data}
           />
           <PropsRoute
