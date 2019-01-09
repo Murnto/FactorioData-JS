@@ -77,13 +77,13 @@ export class PrototypeLink extends PackComponent<
           <span className="fake-link" onClick={this.itemCallback}>
             {!hideIcon && <PrototypeIcon item={item} />}
             {!hideName && <span style={linkStyle}>{item.title}</span>}
-            {children}
+            <span style={linkStyle}>{children}</span>
           </span>
         )) || (
           <Link to={this.props.to || this.data.link.toItem(item)}>
             {!hideIcon && <PrototypeIcon item={item} />}
             {!hideName && <span style={linkStyle}>{item.title}</span>}
-            {children}
+            <span style={linkStyle}>{children}</span>
           </Link>
         )}
       </span>
