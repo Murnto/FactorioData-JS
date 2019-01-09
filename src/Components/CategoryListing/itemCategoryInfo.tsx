@@ -5,7 +5,7 @@ import { Container } from "reactstrap";
 import { PackComponent } from "../../Utils/packComponent";
 import { Item } from "../../types/factorio.item";
 import { PrototypeLink } from "../Minor/prototypeLink";
-import { extractField, toPercentage } from "../../util";
+import { extractField, toDegrees, toPercentage } from "../../util";
 import { PackLoadedData } from "../../packLoadedData";
 
 const itemLink: ItemCategoryField = {
@@ -14,7 +14,135 @@ const itemLink: ItemCategoryField = {
   title: "Item"
 };
 
+const physSize: ItemCategoryField = {
+  field: "selection_box",
+  formatter: val =>
+    `${Math.ceil(
+      Math.abs(val[0][0]) + Math.abs(val[1][0]) - 0.002
+    )}x${Math.ceil(Math.abs(val[0][1]) + Math.abs(val[1][1]) - 0.002)}`,
+  from: "entity",
+  title: "Size"
+};
+
 export const itemCategories: { [name: string]: ItemCategory } = {
+  accumulator: {
+    name: "accumulator",
+    title: "Accumulators",
+
+    entitySelectors: [
+      {
+        key: "type",
+        value: "accumulator"
+      }
+    ],
+
+    fields: [
+      itemLink,
+      {
+        field: "charge_cooldown",
+        from: "entity",
+        title: "Charge CD"
+      },
+      {
+        field: "discharge_cooldown",
+        from: "entity",
+        title: "Discharge CD"
+      },
+      {
+        field: "energy_source.type",
+        from: "entity",
+        title: "Energy type"
+      },
+      {
+        field: "energy_source.buffer_capacity",
+        from: "entity",
+        title: "Capacity"
+      },
+      {
+        field: "energy_source.usage_priority",
+        from: "entity",
+        title: "Usage priority"
+      },
+      {
+        field: "energy_source.input_flow_limit",
+        from: "entity",
+        title: "Input rate"
+      },
+      {
+        field: "energy_source.output_flow_limit",
+        from: "entity",
+        title: "Output rate"
+      }
+    ]
+  },
+  assemblingMachine: {
+    name: "assemblingMachine",
+    title: "Assembling machines",
+
+    entitySelectors: [
+      {
+        key: "type",
+        value: "assembling-machine"
+      }
+    ],
+
+    fields: [
+      itemLink,
+      { field: "crafting_speed", from: "entity", title: "Speed" },
+      physSize,
+      {
+        field: "crafting_categories",
+        formatter: (val: string[]) => val.join(", "),
+        from: "entity",
+        title: "Categories"
+      },
+      { field: "ingredient_count", from: "entity", title: "Max ingredients" },
+      {
+        field: "module_specification.module_slots",
+        from: "entity",
+        title: "Max modules"
+      },
+      { field: "energy_usage", from: "entity", title: "Energy usage" },
+      { field: "energy_source.type", from: "entity", title: "Energy type" },
+      { field: "energy_source.emissions", from: "entity", title: "Emissions" },
+      {
+        field: "energy_source.usage_priority",
+        from: "entity",
+        title: "Energy priority"
+      }
+    ]
+  },
+  boiler: {
+    name: "boiler",
+    title: "Boilers",
+
+    entitySelectors: [
+      {
+        key: "type",
+        value: "boiler"
+      }
+    ],
+
+    fields: [
+      itemLink,
+      {
+        field: "energy_consumption",
+        from: "entity",
+        title: "Energy consumption"
+      },
+      {
+        field: "target_temperature",
+        formatter: toDegrees,
+        from: "entity",
+        title: "Target temp"
+      },
+      {
+        field: "burning_cooldown",
+        from: "entity",
+        title: "Burning CD"
+      }
+    ]
+  },
   fuel: {
     name: "fuel",
     title: "Fuel",
@@ -49,6 +177,169 @@ export const itemCategories: { [name: string]: ItemCategory } = {
           return val ? toPercentage(val) : "";
         },
         title: "Emissions"
+      }
+    ]
+  },
+  furnace: {
+    name: "furnace",
+    title: "Furnaces",
+
+    entitySelectors: [
+      {
+        key: "type",
+        value: "furnace"
+      }
+    ],
+
+    fields: [
+      itemLink,
+      { field: "crafting_speed", from: "entity", title: "Speed" },
+      physSize,
+      {
+        field: "crafting_categories",
+        formatter: (val: string[]) => val.join(", "),
+        from: "entity",
+        title: "Categories"
+      },
+      { field: "result_inventory_size", from: "entity", title: "Result size" },
+      { field: "source_inventory_size", from: "entity", title: "Source size" },
+      {
+        field: "module_specification.module_slots",
+        from: "entity",
+        title: "Max modules"
+      },
+      { field: "energy_usage", from: "entity", title: "Energy usage" },
+      { field: "energy_source.type", from: "entity", title: "Energy type" },
+      { field: "energy_source.emissions", from: "entity", title: "Emissions" },
+      {
+        field: "energy_source.usage_priority",
+        from: "entity",
+        title: "Energy priority"
+      }
+    ]
+  },
+  generator: {
+    name: "generator",
+    title: "Generators",
+
+    entitySelectors: [
+      {
+        key: "type",
+        value: "generator"
+      }
+    ],
+
+    fields: [
+      itemLink,
+      {
+        field: "effectivity",
+        formatter: toPercentage,
+        from: "entity",
+        title: "Effectivity"
+      },
+      {
+        field: "maximum_temperature",
+        formatter: toDegrees,
+        from: "entity",
+        title: "Max temp"
+      },
+      {
+        field: "fluid_usage_per_tick",
+        formatter: val => val * 60,
+        from: "entity",
+        title: "Fluid/sec"
+      }
+    ]
+  },
+  miningDrill: {
+    name: "miningDrill",
+    title: "Mining drills",
+
+    entitySelectors: [
+      {
+        key: "type",
+        value: "mining-drill"
+      }
+    ],
+
+    fields: [
+      itemLink,
+      { field: "mining_speed", from: "entity", title: "Speed" },
+      { field: "mining_power", from: "entity", title: "Mining power" },
+      physSize,
+      {
+        field: "resource_categories",
+        formatter: (val: string[]) => val.join(", "),
+        from: "entity",
+        title: "Categories"
+      },
+      { field: "resource_searching_radius", from: "entity", title: "Radius" },
+      { field: "storage_slots", from: "entity", title: "Slots" },
+      {
+        field: "module_specification.module_slots",
+        from: "entity",
+        title: "Max modules"
+      },
+      { field: "energy_usage", from: "entity", title: "Energy usage" },
+      { field: "energy_source.type", from: "entity", title: "Energy type" },
+      { field: "energy_source.emissions", from: "entity", title: "Emissions" },
+      {
+        field: "energy_source.usage_priority",
+        from: "entity",
+        title: "Energy priority"
+      }
+    ]
+  },
+  solarPanel: {
+    name: "solarPanel",
+    title: "Solar panels",
+
+    entitySelectors: [
+      {
+        key: "type",
+        value: "solar-panel"
+      }
+    ],
+
+    fields: [
+      itemLink,
+      { field: "production", from: "entity", title: "Production" },
+      physSize,
+      { field: "energy_source.type", from: "entity", title: "Energy type" },
+      {
+        field: "energy_source.usage_priority",
+        from: "entity",
+        title: "Usage priority"
+      }
+    ]
+  },
+  undergroundPipe: {
+    name: "undergroundPipe",
+    title: "Underground pipes",
+
+    entitySelectors: [
+      {
+        key: "type",
+        value: "pipe-to-ground"
+      }
+    ],
+
+    fields: [
+      itemLink,
+      physSize,
+      {
+        field: "fluid_box.pipe_connections",
+        formatter: (val: any[]) => {
+          for (const connection of val) {
+            if (connection.max_underground_distance !== undefined) {
+              return connection.max_underground_distance.toString();
+            }
+          }
+
+          return "";
+        },
+        from: "entity",
+        title: "Max underground distance"
       }
     ]
   }
@@ -114,6 +405,10 @@ export function matchesSelectors(
         console.log(obj, selectors);
 
         throw new Error("selector.value expected to be truthy");
+      }
+
+      if (selector.value !== val) {
+        return false; // value mismatch
       }
     }
   }
@@ -215,7 +510,9 @@ export class ItemCategoryInfo extends PackComponent<
     }
 
     return (
-      <Container>
+      <Container style={{ marginTop: "1em" }}>
+        <h3>{categorySpec.title}</h3>
+
         <table id="table" className="table">
           <thead>
             <tr>
