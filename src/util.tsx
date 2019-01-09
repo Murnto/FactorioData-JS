@@ -87,3 +87,11 @@ export function expectedAmount(item: Ingredient): number | null {
   }
   return null;
 }
+
+export function toPercentage(x: number): string {
+  return `${Math.round(x * 10000 + 0.00001) / 100}%`;
+}
+
+export function toDegrees(x: any): string {
+  return `${x}°`;
+}

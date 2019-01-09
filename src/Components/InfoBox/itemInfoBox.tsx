@@ -2,14 +2,7 @@ import * as React from "react";
 import ReactJson from "react-json-view";
 import { Item } from "../../types/factorio.item";
 import { PackComponent } from "../../Utils/packComponent";
-
-function toPercentage(x: number): string {
-  return `${Math.round(x * 10000 + 0.00001) / 100}%`;
-}
-
-function toDegrees(x: any): string {
-  return `${x}°`;
-}
+import { toDegrees, toPercentage } from "../../util";
 
 const entries: any[][] = [
   ["title", "Title"],
