@@ -93,23 +93,14 @@ class App extends Component<
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
-            {this.renderPackLink(`/pack/${currentPack}`, "Item Search")}
-            {this.renderPackLink(`/pack/${currentPack}/itemCat`, "Item Categories")}
-            {this.renderPackLink(`/pack/${currentPack}/tech`, "Technology")}
-            {/*{this.renderPackLink(*/}
-            {/*`/pack/${currentPack}/recipecat`,*/}
-            {/*"Recipe Categories"*/}
-            {/*)}*/}
-            {/*{this.renderPackLink(`/pack/${currentPack}/info`, "Pack Info")}*/}
-            {/*{this.renderPackLink(*/}
-            {/*`/pack/${currentPack}/i/item/iron-plate`,*/}
-            {/*"Iron Plate"*/}
-            {/*)}*/}
-            {/*{this.renderPackLink(*/}
-            {/*`/pack/${currentPack}/factoratio`,*/}
-            {/*"Factoratio"*/}
-            {/*)}*/}
-            {/*{this.renderPackLink(`/pack/${currentPack}/test`, "Test")}*/}
+            {this.renderPackLink("", "Item Search")}
+            {this.renderPackLink("/itemCat", "Item Categories")}
+            {this.renderPackLink("/tech", "Technology")}
+            {/*{this.renderPackLink("/recipecat", "Recipe Categories")}*/}
+            {/*{this.renderPackLink("/info", "Pack Info")}*/}
+            {/*{this.renderPackLink("/i/item/iron-plate", "Iron Plate")}*/}
+            {/*{this.renderPackLink("/factoratio", "Factoratio")}*/}
+            {/*{this.renderPackLink("/test", "Test")}*/}
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 Config Pack: {currentPack}
@@ -141,7 +132,7 @@ class App extends Component<
   private renderPackLink(path: string, name: string): JSX.Element {
     return (
       <NavItem>
-        <NavLink tag={Link} to={path}>
+        <NavLink tag={Link} to={`/pack/${this.state.currentPack}${path}`}>
           {name}
         </NavLink>
       </NavItem>
