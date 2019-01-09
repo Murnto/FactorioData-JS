@@ -65,7 +65,7 @@ export class PrototypeLink extends PackComponent<
 
   public render() {
     const { item } = this.state;
-    const { hideIcon, hideName, onClick } = this.props;
+    const { hideIcon, hideName, onClick, children } = this.props;
 
     if (item === null || item === undefined) {
       return <span>Error</span>;
@@ -77,11 +77,13 @@ export class PrototypeLink extends PackComponent<
           <span className="fake-link" onClick={this.itemCallback}>
             {!hideIcon && <PrototypeIcon item={item} />}
             {!hideName && <span style={linkStyle}>{item.title}</span>}
+            {children}
           </span>
         )) || (
           <Link to={this.props.to || this.data.link.toItem(item)}>
             {!hideIcon && <PrototypeIcon item={item} />}
             {!hideName && <span style={linkStyle}>{item.title}</span>}
+            {children}
           </Link>
         )}
       </span>
